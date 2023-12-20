@@ -8,6 +8,7 @@
       { name = "tide"; src = tide; }
     ];
     interactiveShellInit = ''
+      set fish_greeting
       set --export GIT_EDITOR hx
     '';
   };
