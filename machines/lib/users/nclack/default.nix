@@ -13,6 +13,7 @@
 		shell = pkgs.fish;
     packages = with pkgs; [
       git
+			fish
     ];
   };
 

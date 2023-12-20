@@ -14,8 +14,12 @@
     username = "nclack";
     homeDirectory = "/home/nclack";
 
-    packages = [
-      pkgs.fortune
-    ];
+    sessionVariables = {
+      EDITOR = "hx";
+    };
+
+    file = {
+      "./.config/helix".source=./config/helix;
+    };
   };
 }
