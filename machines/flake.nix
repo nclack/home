@@ -9,13 +9,14 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      "whorl" = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  let
+    mkNixos = hostname: nixpkgs.lib.nixosSystem
+      {
         system = "aarch64-linux";
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs; inherit hostname;};
         modules = [
-          ./configuration.nix
+          ./${hostname}
 
           home-manager.nixosModules.home-manager 
           {
@@ -24,12 +25,16 @@
               useGlobalPkgs = true;
               useUserPackages = true;
               users = {
-                "nclack" = import ./home.nix;
+                "nclack" = import ./lib/users/nclack/home.nix;
               };
             };
           }
         ];
-      };
+      };  
+  in
+  {
+    nixosConfigurations = {
+      whorl = mkNixos "whorl";
     };
   };
 }    
