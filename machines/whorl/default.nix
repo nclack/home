@@ -30,6 +30,7 @@
   	spice-vdagent
   	helix
     nil # nix language server
+    fish
   ];
 
   services.qemuGuest.enable = true;
