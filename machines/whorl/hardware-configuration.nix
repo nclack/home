@@ -23,6 +23,12 @@
       fsType = "vfat";
     };
 
+  fileSystems."mnt/shared" = {
+    device = "/Users/nclack";
+    fsType = "vboxsf";
+    options = ["rw" "uid=1000" "gid=100"];
+  };
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
