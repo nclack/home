@@ -25,8 +25,8 @@
 
   fileSystems."mnt/shared" = {
     device = "/Users/nclack";
-    fsType = "vboxsf";
-    options = ["rw" "uid=1000" "gid=100"];
+    fsType = "9p";
+    options = ["trans=virtio" "version=9p2000.L" "rw"];
   };
 
   swapDevices = [ ];
