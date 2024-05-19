@@ -23,8 +23,8 @@
       fsType = "vfat";
     };
 
-  fileSystems."mnt/shared" = {
-    device = "/Users/nclack";
+  fileSystems."/mnt/shared" = {
+    device = "share";
     fsType = "9p";
     options = ["trans=virtio" "version=9p2000.L" "rw"];
   };
