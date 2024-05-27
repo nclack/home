@@ -31,6 +31,7 @@
   	helix
     nil # nix language server
     fish
+    direnv
   ];
 
   services.qemuGuest.enable = true;
