@@ -5,6 +5,7 @@
 - [x] enable flakes on current config
 - [x] create `oreb` machine in `home` 
 - [x] install chrome
+- [x] install steam
 
 ## Tips
 

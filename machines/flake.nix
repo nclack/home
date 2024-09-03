@@ -18,6 +18,11 @@
         modules = [
           ./${hostname}
 
+          {
+            # pin system nixpkgs to the same version as the flake input
+            nix.nixPath = ["nixpkgs=${nixpkgs}"];
+          }
+
           home-manager.nixosModules.home-manager 
           {
             home-manager = {

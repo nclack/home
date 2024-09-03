@@ -62,6 +62,8 @@
 
   programs = {
     fish.enable = true;
+    steam.enable = true;
+    # command-not-found.enable = false;
   };
 
   # This value determines the NixOS release from which the default
