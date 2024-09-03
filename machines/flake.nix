@@ -11,9 +11,9 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: 
   let
-    mkNixos = hostname: nixpkgs.lib.nixosSystem
+    mkNixos = hostname: system: nixpkgs.lib.nixosSystem
       {
-        system = "aarch64-linux";
+        inherit system;
         specialArgs = {inherit inputs; inherit hostname;};
         modules = [
           ./${hostname}
@@ -24,6 +24,7 @@
               extraSpecialArgs = {inherit inputs;};
               useGlobalPkgs = true;
               useUserPackages = true;
+              backupFileExtension = "backup";
               users = {
                 "nclack" = import ./lib/users/nclack/home.nix;
               };
@@ -34,7 +35,8 @@
   in
   {
     nixosConfigurations = {
-      whorl = mkNixos "whorl";
+      whorl = mkNixos "whorl" "aarch64-linux";
+      oreb = mkNixos "oreb" "x86_64-linux";
     };
   };
 }    

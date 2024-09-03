@@ -1,0 +1,118 @@
+# 2024-09-02
+
+## TODO
+
+- [x] enable flakes on current config
+- [x] create `oreb` machine in `home` 
+- [x] install chrome
+
+## Tips
+
+```bash
+nix flake update <dir> # updates the flake.lock file in <dir>
+sudo nixos-rebuild update --flake <dir> # rebuild and update the system 
+```
+
+## Notes
+
+It's sooooo nice to get all my home files setup on reboot. It's actually
+insane that this works so well.
+
+I'm tempted to give home-manager another chance. I definitely need to 
+reorganize the code a bit. It's hard to tell what's done where. I've split
+things into too many files.
+
+## Enabling flakes
+
+Following [this](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/nixos-with-flakes-enabled).
+
+Add this to `/etc/nixos/configuration.nix`:
+
+```nix
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
+```
+
+Followed by a 
+
+```bash
+sudo nixos-rebuild switch
+```
+
+Got a warning:
+
+```
+trace: warning: The option `services.xserver.displayManager.autoLogin'
+defined in `/etc/nixos/configuration.nix' has been renamed to
+`services.displayManager.autoLogin'.
+```
+
+## Aside
+
+The keyboard layout on this zenbook leaves a lot to be desired.
+
+
+# 2024-09-01
+
+I have an Asus Zenbook UX371E laptop. I had been running a mix of PopOS 22.04
+and Regolith, and then left the laptop alone for a long time. Since then,
+I've been playing around with NixOS on a virtual machine, `whorl`. This weekend
+I decided to go ahead and bite the bullet and try it on this laptop. There were
+a couple things I found encouraging:
+
+1. I can start with the [NixOS Gnome ISO][].
+2. There's a [hardware overlay][] for this laptop.
+3. PopOS's new version [Cosmic][] has a [Nix thing](https://github.com/lilyinstarlight/nixos-cosmic).
+4. Steam should work with Nix.
+
+With Nix, I have checkpointed systems. In theory, I should be able to start with
+that Gnome ISO, and rip everything apart to my hearts content to try things out.
+
+Steam is the only real reason to have this linux laptop since I can rely on
+virtual machines almost anywhere else.
+
+[NixOS Gnome ISO]: https://nixos.org/download/
+[hardware overlay]: https://github.com/NixOS/nixos-hardware/tree/master/asus/zenbook/ux371
+[Cosmic]: https://system76.com/cosmic 
+
+## Initial setup
+
+### First steps 
+
+## Getting my [home](https://github.com/nclack/home) files
+
+It turns out that the github cli `gh` will do all the hard work of setting up an
+ssh key and uploading it.
+
+```bash
+nix-shell -p gh git
+gh auth login # follow the flow to generate and upload a key
+gh repo clone nclack/home
+```
+
+Q: What happens to the ssh key when I exit the shell? Will `gh` recognize
+that I'm logged in next time?
+A: Yes, it does seem to keep me logged in.
+
+## Start editing stuff
+
+I need an editor for this devlog and the nix files.
+
+```bash
+nix-shell -p hx nil markdown-oxide
+```
+
+[markdown-oxide](https://oxide.md) is intersting. It promisses to be an
+[Obsidian](https://obsidian.md) for markdown notes.
+
+- [ ] make a `shell.nix` for developing my home files.
+- [ ] look into [material-oxide] more. Consider setting up a `.moxide` file for this devlog. 
+
+### Remembering how to use `nix`
+
+I used some blog post to setup `whorl`. How to adapt for `oreb`?
+
+I remember using some [fasterthanlime tutorial][]. I can't remember how I
+initially configured flakes, or why I setup this repo like I did. I remember
+that I don't like `home-manager`.
+
+[fasterthanlime tutorial]: https://fasterthanli.me/series/building-a-rust-service-with-nix

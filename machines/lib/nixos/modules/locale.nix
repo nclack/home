@@ -4,9 +4,9 @@
   time.timeZone = "America/Los_Angeles";
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "us";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Select internationalisation properties.

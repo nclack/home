@@ -3,8 +3,6 @@
 		./authorized-keys.nix
 	];
 
-	programs.fish.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nclack = {
     isNormalUser = true;
@@ -18,5 +16,17 @@
   };
 
   # Enable automatic login for the user.
-  services.getty.autologinUser = "nclack";
+  services = {
+		getty.autologinUser = "nclack";
+
+		displayManager.autoLogin = {
+			enable = true;
+			user = "nclack";
+		};
+	};
+
+	systemd.services = {
+		"getty@tty1".enable = false;
+		"autovt@tty1".enable = false;
+	};
 }
