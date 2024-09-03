@@ -6,6 +6,31 @@
 - [x] create `oreb` machine in `home` 
 - [x] install chrome
 - [x] install steam
+- [x] ~popos cosmic~
+
+## Cosmic
+
+Following [README](https://github.com/lilyinstarlight/nixos-cosmic/)
+
+Starting by brute forcing for `oreb` but would like to make it optional
+for `whorl`.
+
+First try, no text showed up.
+
+It looks like a recent [bug](https://github.com/NixOS/nixpkgs/issues/338933).
+
+Looks like this is a little too new :) 
+
+I'm still doing gnome for now and will look at i3. It looks like the issue 
+could get resolved pretty soon, so maybe if I check back in a few days.
+
+In the meantime, I should just cleanup my setup in this repo.
+
+There are other directions. I could look into wayland, but that also looks
+too new (i.e. for steam). I'm not sure I see the upside either. Lots of folks
+have gone down the route of ricing with i3 and rofi et al. If I get my home
+packages in order, this might be fun.  However, at that point cosmic might
+be fixed.
 
 ## Tips
 

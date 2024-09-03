@@ -24,6 +24,9 @@
     };
   };
 
+  # services.desktopManager.cosmic.enable=true;
+  # services.displayManager.cosmic-greeter.enable=true;
+
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
@@ -58,6 +61,8 @@
     fish
     google-chrome
     nil # nix language server
+    xclip
+    xsel
   ];
 
   programs = {
