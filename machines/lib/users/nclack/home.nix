@@ -10,7 +10,7 @@
   ];
 
   home = {
-    stateVersion = "23.11";
+    stateVersion = "24.05"; # NOTE: changed this between whorl and oreb
     username = "nclack";
     homeDirectory = "/home/nclack";
 

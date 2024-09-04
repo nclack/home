@@ -1,3 +1,17 @@
+# 2024-09-03
+
+## TODO
+
+- [x] check on that issue
+- [x] check out using cosmic on a stable nixos
+- [ ] try out cosmic. Do I like it?
+    - [ ] does steam work ok
+- [ ] refactor!
+
+Switching to 24.05 works, of course.
+
+Cosmic seems ok! Does tiling, seems reasonable so far?
+
 # 2024-09-02
 
 ## TODO
