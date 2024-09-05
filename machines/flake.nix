@@ -13,28 +13,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-cosmic, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
   let
     mkNixos = hostname: system: nixpkgs.lib.nixosSystem
       {
         inherit system;
         specialArgs = {inherit inputs; inherit hostname;};
         modules = [
-          # nixos-cosmic
           {
             nix.settings = {
               substituters = [ "https://cosmic.cachix.org/" ];
               trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
             };
           }
-          nixos-cosmic.nixosModules.default
 
           ./${hostname}
 
-          {
-            # pin system nixpkgs to the same version as the flake input
-            nix.nixPath = ["nixpkgs=${nixpkgs}"];
-          }
 
           home-manager.nixosModules.home-manager 
           {
