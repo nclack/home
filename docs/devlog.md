@@ -1,12 +1,30 @@
+# 2024-09-06
+
+## TODO
+
+- [ ] refactor!
+    - [x] move flake to root
+    - [x] rename machines to hosts
+    - [ ] `shell.nix`
+    - [ ] make `home/` for `home-manager` stuff
+        - [ ] move stuff over
+
+## Random
+
+- I got chrome to not be blurry! Thanks to this [thread](https://askubuntu.com/questions/1472847/google-chrome-is-blurry-on-ubuntu-23-04-wayland-nvidia-3050-ti-hidpi-screen-w).
+
+- Need to run, for example, `nixos rebuid test --flake` to run the stuff in
+  the current directory. Otherwise I get a weird error about 
+  nixos-config not being present.
+
 # 2024-09-03
 
 ## TODO
 
 - [x] check on that issue
 - [x] check out using cosmic on a stable nixos
-- [ ] try out cosmic. Do I like it?
-    - [ ] does steam work ok
-- [ ] refactor!
+- [x] try out cosmic. Do I like it?
+    - [x] does steam work ok (Yes)
 
 Switching to 24.05 works, of course.
 
