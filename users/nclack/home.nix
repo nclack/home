@@ -1,10 +1,9 @@
-{pkgs, ...}:
+{lib, config, ...}:
 {
-  nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable=true;
 
   imports = [
-    ./lib/fish
+    ./lib/fish.nix
     ./lib/git
     ./lib/packages.nix
   ];

@@ -1,13 +1,15 @@
 # Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config,  pkgs, hostname, inputs, ... }:
+{ pkgs, hostname, inputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       inputs.nixos-cosmic.nixosModules.default
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # common ssh, local and nix settings  (flakes, unfree)
       ../lib/nixos
     ];
 
@@ -58,8 +60,6 @@
     jack.enable = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -73,8 +73,6 @@
 
   programs = {
     fish.enable = true;
-    steam.enable = true;
-    # command-not-found.enable = false;
   };
 
   # This value determines the NixOS release from which the default
