@@ -24,7 +24,7 @@
   users.users.nclack = {
     isNormalUser = true;
     description = "Nathan Clack";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "plugdev"];
 		shell = pkgs.fish;
     packages = with pkgs; [
       git

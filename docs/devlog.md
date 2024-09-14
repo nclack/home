@@ -1,6 +1,24 @@
+# 2024-09-13
+
+## Plan
+
+- [ ] udev fix for keyboard
+- [ ] obs studio
+- [ ] optionally install packages depending on xserver.
+
+## Notes
+
+I'd like to install OBS Studio. I can do it from a flatpack, which should 
+work fine. But of course, I'd like to do this as part of my config to make
+my life harder.
+
+Also, I'm doing this on my desktop, with a keyboard I've customized. I can't 
+remember where the tilde is, so I'd like to use vial.web. That needs some udev
+thing.
+
 # 2024-09-08
 
-Tried mvoving steam over to user-specific config/home-manager.
+Tried moving steam over to user-specific config/home-manager.
 
 It's not in home-manager so not doing it there.
 
@@ -12,6 +30,17 @@ looks helpful - they recommend using [options][] for modules. Don't understand
 them yet.
 
 [options]: https://nixos.org/manual/nixos/stable/options
+
+## problems
+
+While trying to suss out that infinite recursion problem (hint: don't refer
+to lib.config in a module), I managed to delete my user account? Or at least
+get the password messed up. I ended up having to login as root - that password
+was fine. Then I could reset the password for my user. The nixos rollbacks
+didn't help which isn't too surprising.
+
+Anyway, I can't remember how far I got with the steam thing. I think I just
+had to leave it as always on - couldn't optionally detect xsession.
 
 # 2024-09-06
 
