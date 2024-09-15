@@ -1,10 +1,55 @@
+# 2024-09-14
+
+## Plan
+
+- [x] wayland
+- [x] optionally install packages depending on xserver.
+- [ ] cleanup - reinstall from iso?
+- [ ] experiment with kubernetes?
+- [x] other cosmic things to install
+- [ ] git crypt
+
+## Wayland
+
+asking claude, it looks like all I have to do is
+
+```nix
+services.xserver.displayManager.gdm.wayland=true;
+```
+
+It looks like claude is very confused about the state of cosmic. I keep 
+needing to prompt in that direction.
+
+Oh, I might already be using wayland. lol
+
+```fish
+echo $XDG_SESSION_TYPE
+wayland
+```
+
+## optional xserver-dependent config in modules
+
+- still running into a recursion when I try to use options.
+- realized helix clipboard wasn't working. trying wl-clipboard now that I
+  know I'm on wayland. That worked.
+
+`mkIf` is a special form that defers evaulation, and therefore avoids the 
+recursion. 
+
+## other cosmic things to install
+
+I don't have anything in `cosmic-store` and `cosmic-bg`. How to populate?
+
+They're installed so that's not the problem.
+
+Maybe I don't care.
+
 # 2024-09-13
 
 ## Plan
 
-- [ ] udev fix for keyboard
-- [ ] obs studio
-- [ ] optionally install packages depending on xserver.
+- [x] udev fix for keyboard
+- [x] obs studio
 
 ## Notes
 
@@ -15,6 +60,27 @@ my life harder.
 Also, I'm doing this on my desktop, with a keyboard I've customized. I can't 
 remember where the tilde is, so I'd like to use vial.web. That needs some udev
 thing.
+
+### Keyboard
+
+I eventually got it to work after screwing around with claude a bit to debug.
+Annoyingly hard to get claude to spit out an answer. 
+
+Can install via with `nix-shell -p via` and use that. Alteranatively 
+[usevia.app](https://usevia.app) works.
+
+## OBS
+
+I decided to just install the flatpak. So I'm enabling flatpak in nixos. 
+
+There may be a follow up step where I need to do:
+
+```
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+```
+
+That seemed to work. flatpak looks a little scary but whatev.
+
 
 # 2024-09-08
 

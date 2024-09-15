@@ -14,17 +14,15 @@
         };
       };
     }	
-	]
-	# FIXME: (nclack) infinite recursion on config, see devlog 8 sep 2024
-  ++ lib.optionals true [ # config.xsession.enable [
-    ./lib/steam.nix
-  ];
+
+		./lib/steam.nix
+	];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.nclack = {
     isNormalUser = true;
     description = "Nathan Clack";
-    extraGroups = [ "networkmanager" "wheel" "input" "plugdev"];
+    extraGroups = [ "networkmanager" "wheel" "input" "plugdev" "dialout" "uucp"];
 		shell = pkgs.fish;
     packages = with pkgs; [
       git

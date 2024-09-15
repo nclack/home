@@ -9,6 +9,7 @@
       inputs.nixos-cosmic.nixosModules.default
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./keyboard.nix
       # common ssh, local and nix settings  (flakes, unfree)
       ../lib/nixos
     ];
@@ -36,6 +37,8 @@
     enable=true;
     powerOnBoot=true;
   };
+
+  services.flatpak.enable=true;
 
   services.desktopManager.cosmic.enable=true;
   services.displayManager.cosmic-greeter.enable=true;
@@ -72,8 +75,14 @@
     fish
     google-chrome
     nil # nix language server
+
+    wl-clipboard
     xclip
     xsel
+
+    libusb
+    usbutils
+    linuxHeaders
   ];
 
   programs = {
