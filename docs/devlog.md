@@ -1,3 +1,16 @@
+# 2024-09-20
+
+## Plan
+
+ - [x] update whorl for all the changes. could get spicy bc of the reused user
+ - [ ] try out minikube on whorl
+
+## Notes
+
+Getting whorl up to date what surprisingly easy.
+
+
+
 # 2024-09-14
 
 ## Plan
