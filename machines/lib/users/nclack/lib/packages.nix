@@ -8,5 +8,6 @@
 		gh
 		git
 		ripgrep
+		direnv
 	];
 }
