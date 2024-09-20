@@ -7,6 +7,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # common ssh, local and nix settings  (flakes, unfree)
       ../lib/nixos
     ];
 

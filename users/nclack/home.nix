@@ -1,16 +1,15 @@
-{pkgs, ...}:
+{lib, config, ...}:
 {
-  nixpkgs.config.allowUnfree = true;
   programs.home-manager.enable=true;
 
   imports = [
-    ./lib/fish
+    ./lib/fish.nix
     ./lib/git
     ./lib/packages.nix
   ];
 
   home = {
-    stateVersion = "23.11";
+    stateVersion = "24.05"; # NOTE: changed this between whorl and oreb
     username = "nclack";
     homeDirectory = "/home/nclack";
 
