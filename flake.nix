@@ -26,18 +26,6 @@
 
             ./users/nclack
 
-            # home-manager.nixosModules.home-manager 
-            # {
-            #   home-manager = {
-            #     extraSpecialArgs = {inherit inputs;};
-            #     useGlobalPkgs = true;
-            #     useUserPackages = true;
-            #     backupFileExtension = "backup";
-            #     users = {
-            #       "nclack" = import ./hosts/lib/users/nclack/home.nix;
-            #     };
-            #   };
-            # }
           ];
         };  
     in
