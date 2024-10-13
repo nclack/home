@@ -32,11 +32,14 @@
   	helix
     nil # nix language server
     fish
-    direnv
   ];
 
   services.qemuGuest.enable = true;
   services.spice-webdavd.enable = true;
+
+  programs = {
+    fish.enable = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
