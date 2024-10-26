@@ -1,6 +1,10 @@
 [[language]]
+name = "markdown"
+language-servers = ["marksman", "markdown-oxide", "typos"]
+
+[[language]]
 name = "python"
-language-servers = [ "pyright", "ruff" ]
+language-servers = [ "pyright", "ruff", "typos" ]
 auto-format = true
 formatter = {command="ruff", args = ["format","-"]}
 
@@ -11,8 +15,25 @@ typeCheckingMode = "basic"
 command = "ruff-lsp"
 
 [[language]]
+name = "rust"
+language-servers = ["rust-analyzer", "typos"]
+
+[[language]]
 name = "zig"
 language-servers = ["zls"]
 
 [language-servers.zls]
 command = "zls"
+
+
+[language-server.typos]
+command = "typos-lsp"
+# Logging level of the language server. Defaults to error.
+# Run with helix -v to output LSP logs to the editor log (:log-open)
+environment = {"RUST_LOG" = "error"}
+# Custom config. Used together with a config file found in the workspace or its parents,
+# taking precedence for settings declared in both. Equivalent to the typos `--config` cli argument.
+#config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
+# How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
+# Defaults to Warning.
+config.diagnosticSeverity = "Warning"
