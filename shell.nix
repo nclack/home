@@ -16,6 +16,7 @@ in
       xclip
       xsel
       git
+      gh
       
       fish
       fzf
