@@ -1,3 +1,31 @@
+# 2024-11-27
+
+## Plan
+
+ - [x] Create gyoll - replacing my windows desktop machine
+ - [ ] gyoll: set up other hard drives
+ - [ ] gyoll: confirm games run with nvidia acceleration'
+ - [ ] move swapfile to another hard drive.
+ - [ ] move steam games to another drive.
+
+## Notes
+
+Initially, did not set up a swap partition which was a mistake. Running at 
+max memory is catastrophic without a swap. Set up a swapfile which helped.
+
+For some reason it decided to try to rebuild cosmic which took a very long 
+time. In the middle, i realized it wasn't using the cachix cache like it was
+supposed to. I ran `nix flake update` and that helped a bit but it still 
+tried to build a lot.
+
+`nvidia-smi` worked right off the bat.
+
+There's a bit of cosmic config stuff that has to be worked out when I first 
+start up. I guess it's not a big deal.
+
+Ran into wayland dropping my mouse? Need to replug it in. May be something
+related to power management.
+
 # 2024-09-20
 
 ## Plan
@@ -8,8 +36,6 @@
 ## Notes
 
 Getting whorl up to date what surprisingly easy.
-
-
 
 # 2024-09-14
 
@@ -46,7 +72,7 @@ wayland
 - realized helix clipboard wasn't working. trying wl-clipboard now that I
   know I'm on wayland. That worked.
 
-`mkIf` is a special form that defers evaulation, and therefore avoids the 
+`mkIf` is a special form that defers evaluation, and therefore avoids the 
 recursion. 
 
 ## other cosmic things to install
@@ -136,7 +162,7 @@ had to leave it as always on - couldn't optionally detect xsession.
 
 - I got chrome to not be blurry! Thanks to this [thread](https://askubuntu.com/questions/1472847/google-chrome-is-blurry-on-ubuntu-23-04-wayland-nvidia-3050-ti-hidpi-screen-w).
 
-- Need to run, for example, `nixos rebuid test --flake` to run the stuff in the
+- Need to run, for example, `nixos rebuild test --flake` to run the stuff in the
   current directory. Otherwise I get a weird error about  nixos-config not being
   present.
 
@@ -281,7 +307,7 @@ I need an editor for this devlog and the nix files.
 nix-shell -p hx nil markdown-oxide
 ```
 
-[markdown-oxide](https://oxide.md) is intersting. It promisses to be an
+[markdown-oxide](https://oxide.md) is interesting. It promises to be an
 [Obsidian](https://obsidian.md) for markdown notes.
 
 - [ ] make a `shell.nix` for developing my home files.
