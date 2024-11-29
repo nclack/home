@@ -14,21 +14,28 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils,... }@inputs: 
-    let
-      mkNixos = hostname: system: nixpkgs.lib.nixosSystem
-        {
-          inherit system;
-          specialArgs = {inherit inputs; inherit hostname;};
-          modules = [
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    ...
+  } @ inputs: let
+    mkNixos = hostname: system:
+      nixpkgs.lib.nixosSystem
+      {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          inherit hostname;
+        };
+        modules = [
+          ./hosts/${hostname}
 
-            ./hosts/${hostname}
-
-            ./users/nclack
-
-          ];
-        };  
-    in
+          ./users/nclack
+        ];
+      };
+  in
     {
       nixosConfigurations = {
         whorl = mkNixos "whorl" "aarch64-linux";
@@ -36,15 +43,12 @@
         gyoll = mkNixos "gyoll" "x86_64-linux";
       };
     }
-
-    //
-
-    flake-utils.lib.eachDefaultSystem( system:
-      let 
-        pkgs = import nixpkgs { inherit system; };
-      in 
-      {
-        devShell = import ./shell.nix {inherit pkgs;}; 
+    // flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        formatter = pkgs.alejandra;
+        devShell = import ./shell.nix {inherit pkgs;};
       }
     );
-}    
+}

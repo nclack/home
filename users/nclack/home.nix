@@ -1,6 +1,9 @@
-{lib, config, ...}:
 {
-  programs.home-manager.enable=true;
+  lib,
+  config,
+  ...
+}: {
+  programs.home-manager.enable = true;
 
   imports = [
     ./lib/fish.nix
@@ -18,7 +21,7 @@
     };
 
     file = {
-      "./.config/helix".source=./config/helix;
+      "./.config/helix".source = ./config/helix;
     };
   };
 }

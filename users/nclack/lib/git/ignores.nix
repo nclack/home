@@ -1,8 +1,8 @@
 [
-	".vscode"
-	".nix-gc-roots"
-	".pyc"
-	".egg"
-	".direnv"
-	"*.pid"
+  ".vscode"
+  ".nix-gc-roots"
+  ".pyc"
+  ".egg"
+  ".direnv"
+  "*.pid"
 ]

@@ -1,5 +1,4 @@
-{services,...}:
-{
+{services, ...}: {
   # allow access to USB devices for flashing.
   # Should help with using e.g. vial.
   # Vendor id's cover various kb manufacturers:

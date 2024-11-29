@@ -1,3 +1,20 @@
+# 2024-11-29
+
+## Plan
+ - [ ] gyoll: debug usb hub issue
+
+## Notes
+
+- unplugging the usb hub helps
+- I think it's putting devices to sleep, repeated after a few minutes went 
+  by
+- trying to disable autosuspend, and added the thunderbolt kernel module.
+- tried forcing the thunderbolt doc to init earlier?
+
+Not sure if any of that worked. The last time I booted the mouse was working?
+Something is still strange and I noticed I screwed up my monitor cable. Not
+sure if that's related (probably not) but maybe I should fix that.
+
 # 2024-11-27
 
 ## Plan

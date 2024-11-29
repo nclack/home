@@ -1,6 +1,4 @@
-{ pkgs ? import <nixpkgs> {} }:
-
-let
+{pkgs ? import <nixpkgs> {}}: let
   fishConfig = pkgs.writeText "devshell-config.fish" ''
     function fish_right_prompt
         echo -n (set_color blue)"[dev home] "(set_color normal)
@@ -8,7 +6,8 @@ let
   '';
 in
   pkgs.mkShell {
-    buildInputs = with pkgs; [
+    packages = with pkgs; [
+      alejandra
       helix
       nil
       markdown-oxide
@@ -17,7 +16,7 @@ in
       xsel
       git
       gh
-      
+
       fish
       fzf
       ripgrep

@@ -1,5 +1,4 @@
-{services,...}:
-{
+{services, ...}: {
   # allow access to USB devices for flashing.
   # Should help with using e.g. vial.
   # Vendor id's cover various kb manufacturers:
@@ -11,6 +10,8 @@
   # 2341: Used by Arduino boards (sometimes used in custom keyboards)
   # 16c0: Used by Teensy boards (often used in custom keyboards)
   services.udev.extraRules = ''
+    # Force dock USB controller to initialize earlier
+    SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1"
     # Keychron Q8
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="3434", ATTRS{idProduct}=="0181", TAG+="uaccess", TAG+="udev-acl"
     # General rules for VIA-compatible keyboards

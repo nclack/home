@@ -1,6 +1,6 @@
 # location and locale
 {
-	# Set your time zone.
+  # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
   # Configure keymap in X11
@@ -23,5 +23,4 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
 }
