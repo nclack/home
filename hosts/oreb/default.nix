@@ -81,7 +81,7 @@
     xclip
     xsel
 
-    libusb
+    libusb1
     usbutils
     linuxHeaders
   ];

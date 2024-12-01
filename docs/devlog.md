@@ -1,4 +1,14 @@
+# 2024-11-30
+
+## Plan
+ - [ ] gyoll: debug usb hub issue
+ - [ ] try out nix 24.11
+
 # 2024-11-29
+
+- phantom monitor issue - probably an nvidia driver issue
+- thunderbolt 4 dock issue
+  - probably usb power related, such a pita 
 
 ## Plan
  - [ ] gyoll: debug usb hub issue
