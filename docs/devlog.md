@@ -2,6 +2,7 @@
 
 ## Plan
  - [ ] gyoll: debug usb hub issue
+ - [ ] check out [stylix](https://stylix.danth.me/)
 
 ## Notes
 
