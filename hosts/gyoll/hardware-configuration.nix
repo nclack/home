@@ -11,14 +11,14 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "thunderbolt"];
+  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "thunderbolt" ];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
   boot.extraModprobeConfig = ''
     options usbcore autosuspend=-1
   '';
-  boot.kernelParams = ["thunderbolt.chain_limit=1"];
+  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9e5efe33-094a-428a-86aa-a0c665559986";

@@ -75,16 +75,18 @@
     helix
     fish
     google-chrome
+    firefox
     nil # nix language server
 
     wl-clipboard
     xclip
     xsel
 
-    libusb
+    libusb1
     usbutils
     linuxHeaders
   ];
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   programs = {
     fish.enable = true;

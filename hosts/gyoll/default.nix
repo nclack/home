@@ -17,8 +17,14 @@
   ];
 
   nix.settings = {
-    substituters = ["https://cosmic.cachix.org/"];
-    trusted-public-keys = ["cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="];
+    substituters = [
+      "https://cosmic.cachix.org/"
+      "https://nix-community.cachix.org/"
+    ];
+    trusted-public-keys = [
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 
   # Bootloader.
@@ -40,7 +46,7 @@
     powerOnBoot = true;
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -48,6 +54,10 @@
     open = false;
     powerManagement.enable = true;
   };
+
+  # Razer Thunderbolt 4 Dock
+  services.hardware.bolt.enable = true;
+  hardware.openrazer.enable = true;
 
   services.flatpak.enable = true;
 
@@ -92,10 +102,11 @@
     xclip
     xsel
 
-    libusb
+    libusb1
     usbutils
     linuxHeaders
   ];
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   programs = {
     fish.enable = true;

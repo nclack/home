@@ -28,11 +28,13 @@
   users.users.nclack = {
     isNormalUser = true;
     description = "Nathan Clack";
-    extraGroups = ["networkmanager" "wheel" "input" "plugdev" "dialout" "uucp"];
+    # TODO: clean up these groups. Only needed on some hosts.
+    extraGroups = ["networkmanager" "wheel" "input" "plugdev" "dialout" "uucp" "openrazer"];
     shell = pkgs.fish;
     packages = with pkgs; [
       git
       fish
+      btop
     ];
   };
 
