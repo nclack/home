@@ -2,13 +2,27 @@
 
 ## Plan
  - [ ] gyoll: debug usb hub issue
- - [ ] try out nix 24.11
+ - [x] try out nix 24.11 on gyoll (effects all)
+ - [x] gyoll: phantom display issue
 
 # 2024-11-29
 
 - phantom monitor issue - probably an nvidia driver issue
+  - found a note on the [nixos-cosmic] readme pointing to a possible fix.
+    see this issue [cosmic-randr#13](https://github.com/pop-os/cosmic-randr/issues/13).
+  - that got rid of the phantom display but chrome is still messed up
 - thunderbolt 4 dock issue
   - probably usb power related, such a pita 
+
+Upgrading to 24.11. Needs to rebuild everything in cosmic, so something with
+the caching is up.
+
+- [ ] I probably don't want to be using lilyinstarlight's nixos-cosmic anymore.
+      cosmic is included in 24.11. Her flake refers to 24.05 and gets 
+      auto-upgraded to the latest alpha. There's a pr to get it to 24.11 so 
+      maybe it's ok. It takes forever to build though.
+
+[nixos-cosmic]: https://github.com/lilyinstarlight/nixos-cosmic
 
 ## Plan
  - [ ] gyoll: debug usb hub issue
@@ -24,6 +38,7 @@
 Not sure if any of that worked. The last time I booted the mouse was working?
 Something is still strange and I noticed I screwed up my monitor cable. Not
 sure if that's related (probably not) but maybe I should fix that.
+
 
 # 2024-11-27
 

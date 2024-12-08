@@ -106,6 +106,7 @@
     usbutils
     linuxHeaders
   ];
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   programs = {
     fish.enable = true;
