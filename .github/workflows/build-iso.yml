@@ -1,4 +1,4 @@
-name: Build NixOS ISO
+name: Build NixOS ISO (aarch64)
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,13 +20,11 @@ jobs:
 
       - name: Build ISO
         run: |
-          nix build .#nixosConfigurations.whorl.config.system.build.isoImage
+          nix build .#nixosConfigurations.myhost.config.system.build.isoImage \
+            --system aarch64-linux
           
-          # The ISO will be in result/iso/
           ISO_PATH=$(readlink -f result/iso/*.iso)
           ISO_NAME=$(basename $ISO_PATH)
-          
-          # Copy the ISO to the workspace root for uploading
           cp $ISO_PATH $ISO_NAME
 
       - name: Create Release
