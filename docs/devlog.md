@@ -1,3 +1,9 @@
+# 2024-12-10
+
+## Plan
+
+- [ ] add github action to build whorl wheel
+
 # 2024-11-30
 
 ## Plan

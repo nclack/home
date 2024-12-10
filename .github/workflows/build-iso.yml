@@ -1,0 +1,39 @@
+name: Build NixOS ISO
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Build ISO
+        run: |
+          nix build .#nixosConfigurations.whorl.config.system.build.isoImage
+          
+          # The ISO will be in result/iso/
+          ISO_PATH=$(readlink -f result/iso/*.iso)
+          ISO_NAME=$(basename $ISO_PATH)
+          
+          # Copy the ISO to the workspace root for uploading
+          cp $ISO_PATH $ISO_NAME
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.iso
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
