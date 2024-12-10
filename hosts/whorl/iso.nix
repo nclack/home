@@ -1,0 +1,55 @@
+name: Build NixOS ISO (aarch64)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-platforms = aarch64-linux
+
+      - name: Build ISO
+        run: |
+          # Debug: Show the flake outputs
+          echo "Available flake outputs:"
+          nix flake show
+          
+          nix build .#nixosConfigurations.whorl-iso.config.system.build.isoImage \
+            --system aarch64-linux \
+            --print-build-logs
+          
+          # Find and copy the ISO
+          ISO_PATH=$(find result/iso -name "*.iso" -type f)
+          if [ -z "$ISO_PATH" ]; then
+            echo "No ISO file found in result/iso"
+            exit 1
+          fi
+          cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.iso
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -31,8 +31,21 @@
         };
         modules = [
           ./hosts/${hostname}
-
           ./users/nclack
+        ];
+      };
+    
+    # Special function for the ISO build
+    mkIso = hostname: system:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit inputs;
+          inherit hostname;
+        };
+        modules = [
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          ./hosts/${hostname}/iso.nix
         ];
       };
   in
@@ -41,6 +54,8 @@
         whorl = mkNixos "whorl" "aarch64-linux";
         oreb = mkNixos "oreb" "x86_64-linux";
         gyoll = mkNixos "gyoll" "x86_64-linux";
+        
+        whorl-iso = mkIso "whorl" "aarch64-linux";
       };
     }
     // flake-utils.lib.eachDefaultSystem (
