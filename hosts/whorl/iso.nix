@@ -1,53 +1,55 @@
-# hosts/whorl/iso.nix
-{ config, lib, pkgs, modulesPath, ... }: {
-  imports = [
-    # Include your base whorl configuration
-    ./default.nix
-  ];
+name: Build NixOS ISO (aarch64)
 
-  # Override the hardware-configuration.nix import from default.nix
-  disabledModules = [ "./hardware-configuration.nix" ];
+on:
+  push:
+    tags:
+      - 'v*'
 
-  # ISO-specific settings
-  isoImage.edition = "whorl-utm";
-  
-  # Essential tools for installation
-  environment.systemPackages = with pkgs; [
-    parted
-    gptfdisk
-    vim
-  ];
+permissions:
+  contents: write
 
-  # Networking configuration - override the default to avoid conflicts
-  networking = lib.mkForce {
-    hostName = "whorl-installer";
-    networkmanager.enable = true;
-    # Disable wireless to avoid conflict with NetworkManager
-    wireless.enable = false;
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [22];
-    };
-  };
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  # Remove specific filesystem mounts
-  fileSystems = lib.mkForce {
-    "/" = {
-      device = "none";
-      fsType = "tmpfs";
-      options = [ "size=2G" "mode=755" ];
-    };
-  };
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
 
-  # Keep the QEMU guest support but remove specific device configurations
-  boot.initrd.availableKernelModules = [
-    "xhci_pci" 
-    "virtio_pci" 
-    "usbhid" 
-    "usb_storage"
-    "sr_mod"
-  ];
-  
-  # Ensure proper architecture
-  nixpkgs.hostPlatform = "aarch64-linux";
-}
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            extra-platforms = aarch64-linux
+
+      - name: Build ISO
+        run: |
+          # Debug: Show the flake outputs
+          echo "Available flake outputs:"
+          nix flake show
+          
+          nix build .#nixosConfigurations.whorl-iso.config.system.build.isoImage \
+            --system aarch64-linux \
+            --print-build-logs
+          
+          # Find and copy the ISO
+          ISO_PATH=$(find result/iso -name "*.iso" -type f)
+          if [ -z "$ISO_PATH" ]; then
+            echo "No ISO file found in result/iso"
+            exit 1
+          fi
+          cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./*.iso
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
