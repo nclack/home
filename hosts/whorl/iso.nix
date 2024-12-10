@@ -18,6 +18,18 @@
     vim
   ];
 
+  # Networking configuration - override the default to avoid conflicts
+  networking = lib.mkForce {
+    hostName = "whorl-installer";
+    networkmanager.enable = true;
+    # Disable wireless to avoid conflict with NetworkManager
+    wireless.enable = false;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [22];
+    };
+  };
+
   # Remove specific filesystem mounts
   fileSystems = lib.mkForce {
     "/" = {
