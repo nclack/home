@@ -7,20 +7,27 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
 
       - name: Install Nix
         uses: cachix/install-nix-action@v25
         with:
           extra_nix_config: |
             experimental-features = nix-command flakes
+            extra-platforms = aarch64-linux
 
       - name: Build ISO
         run: |
           nix build .#nixosConfigurations.whorl-iso.config.system.build.isoImage \
+            --system aarch64-linux \
             --print-build-logs
           
           # Find and copy the ISO
@@ -29,7 +36,6 @@ jobs:
             echo "No ISO file found in result/iso"
             exit 1
           fi
-          ISO_NAME=$(basename "$ISO_PATH")
           cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
 
       - name: Create Release
