@@ -32,11 +32,19 @@
   };
 
   swapDevices = [
-    {
-      device = "/swapfile";
-      size = 36 * 1024;
-    }
+    { device = "/dev/disk/by-uuid/35aaead4-5810-4c6f-a494-98110cefc5f3"; }
   ];
+
+  # Mount points for data drives
+  fileSystems."/data/nvme" = {
+    device = "/dev/disk/by-uuid/f84c5193-8e70-40bc-b2a8-b5f099a19f49";
+    fsType = "ext4";
+  };
+
+  fileSystems."/data/sata" = {
+    device = "/dev/disk/by-uuid/b6840909-d405-496b-80ac-9f074b4cfe45";
+    fsType = "ext4";
+  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -1,8 +1,12 @@
+# 2024-12-21
+
+- [ ] was redoing my swaps, didn't quite finish the last time I left off...
+
 # 2024-12-10
 
 ## Plan
 
-- [ ] add github action to build whorl wheel
+- [x] add github action to build whorl wheel
 
 # 2024-11-30
 
@@ -23,10 +27,11 @@
 Upgrading to 24.11. Needs to rebuild everything in cosmic, so something with
 the caching is up.
 
-- [ ] I probably don't want to be using lilyinstarlight's nixos-cosmic anymore.
+- [x] I probably don't want to be using lilyinstarlight's nixos-cosmic anymore.
       cosmic is included in 24.11. Her flake refers to 24.05 and gets 
       auto-upgraded to the latest alpha. There's a pr to get it to 24.11 so 
       maybe it's ok. It takes forever to build though.
+      Note: it got updated - it's fine
 
 [nixos-cosmic]: https://github.com/lilyinstarlight/nixos-cosmic
 
