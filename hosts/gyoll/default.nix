@@ -30,6 +30,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.blacklistedKernelModules = ["nouveau"];
 
   networking = {
     hostName = "${hostname}"; # Define your hostname.
@@ -49,11 +50,12 @@
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
+    open = false;
     nvidiaSettings = true;
     nvidiaPersistenced = true;
     dynamicBoost.enable = true;
-    open = false;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     prime = {
