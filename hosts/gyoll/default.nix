@@ -52,7 +52,7 @@
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     nvidiaPersistenced = true;
     dynamicBoost.enable = true;
