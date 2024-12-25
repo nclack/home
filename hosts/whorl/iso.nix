@@ -1,14 +1,20 @@
-{ config, lib, pkgs, modulesPath, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     ./default.nix
   ];
 
   # Override the hardware-configuration.nix import from default.nix
-  disabledModules = [ "./hardware-configuration.nix" ];
+  disabledModules = ["./hardware-configuration.nix"];
 
   # ISO-specific settings
   isoImage.edition = "whorl-utm";
-  
+
   # Essential tools for installation
   environment.systemPackages = with pkgs; [
     parted
@@ -33,19 +39,19 @@
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = [ "size=2G" "mode=755" ];
+      options = ["size=2G" "mode=755"];
     };
   };
 
   # Keep the QEMU guest support but remove specific device configurations
   boot.initrd.availableKernelModules = [
-    "xhci_pci" 
-    "virtio_pci" 
-    "usbhid" 
+    "xhci_pci"
+    "virtio_pci"
+    "usbhid"
     "usb_storage"
     "sr_mod"
   ];
-  
+
   # Ensure proper architecture
   nixpkgs.hostPlatform = "aarch64-linux";
 }

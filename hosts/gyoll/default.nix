@@ -51,8 +51,16 @@
   hardware.nvidia = {
     modesetting.enable = true;
     nvidiaSettings = true;
+    nvidiaPersistenced = true;
+    dynamicBoost.enable = true;
     open = false;
-    powerManagement.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   # Razer Thunderbolt 4 Dock
@@ -96,6 +104,7 @@
     helix
     fish
     google-chrome
+    firefox
     nil # nix language server
 
     wl-clipboard
