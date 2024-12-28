@@ -54,8 +54,8 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    nvidiaPersistenced = true;
-    dynamicBoost.enable = true;
+    nvidiaPersistenced = false;
+    dynamicBoost.enable = false;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     # prime = {
