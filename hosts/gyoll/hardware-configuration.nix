@@ -18,7 +18,7 @@
   boot.extraModprobeConfig = ''
     options usbcore autosuspend=-1
   '';
-  boot.kernelParams = ["nvidia_drm.fbdev=1"];
+  # boot.kernelParams = ["nvidia_drm.fbdev=1"];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/9e5efe33-094a-428a-86aa-a0c665559986";

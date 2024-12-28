@@ -50,19 +50,19 @@
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     nvidiaPersistenced = true;
     dynamicBoost.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    prime = {
-      sync.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
+    # prime = {
+    #   sync.enable = true;
+    #   intelBusId = "PCI:0:2:0";
+    #   nvidiaBusId = "PCI:1:0:0";
+    # };
   };
 
   # Razer Thunderbolt 4 Dock

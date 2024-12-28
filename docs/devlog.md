@@ -1,3 +1,15 @@
+# 2024-12-28
+
+Still having trouble with nvidia drivers.
+ - graphical glitches
+ - usb c on startup
+
+For the second one, I might have found a useful link:
+
+https://download.nvidia.com/XFree86/Linux-x86_64/460.73.01/README/dynamicpowermanagement.html
+
+I haven't tried anything yet.
+
 # 2024-12-21
 
 - [ ] was redoing my swaps, didn't quite finish the last time I left off...
