@@ -44,6 +44,11 @@
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
+  # Set global systemd service timeout
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=15s
+  '';
+
   services.xserver = {
     enable = true;
     # displayManager.gdm.enable = true;

@@ -2,7 +2,9 @@
 
 I want to try the cursor ide which is downloadable as an appimage. I can
 apparently [enable support](https://wiki.nixos.org/wiki/Appimage) pretty 
-easily. 
+easily. I've enabled appimage support in both oreb and gyoll.
+
+I've also enabled systemd service timeout in both oreb and gyoll.
 
 # 2024-12-21
 
