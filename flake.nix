@@ -19,17 +19,37 @@
     nixpkgs,
     home-manager,
     flake-utils,
+    nixos-cosmic,
     ...
   } @ inputs: let
+    # Function to create an overlay for custom packages
+    overlay = final: prev: import ./pkgs { 
+      pkgs = final; 
+      inherit nixpkgs;
+    };
+    
+    # Common nixpkgs configuration
+    nixpkgsConfig = {
+      config = {
+        allowUnfree = true;
+      };
+      overlays = [
+        overlay
+        nixos-cosmic.overlays.default
+      ];
+    };
+
     mkNixos = hostname: system:
       nixpkgs.lib.nixosSystem
       {
         inherit system;
         specialArgs = {
-          inherit inputs;
-          inherit hostname;
+          inherit inputs hostname;
         };
         modules = [
+          {
+            nixpkgs = nixpkgsConfig;
+          }
           ./hosts/${hostname}
           ./users/nclack
         ];
@@ -40,10 +60,12 @@
       nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs;
-          inherit hostname;
+          inherit inputs hostname;
         };
         modules = [
+          {
+            nixpkgs = nixpkgsConfig;
+          }
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./hosts/${hostname}/iso.nix
         ];
@@ -57,13 +79,16 @@
 
         whorl-iso = mkIso "whorl" "aarch64-linux";
       };
+
+      overlays.default = overlay;
     }
     // flake-utils.lib.eachDefaultSystem (
       system: let
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs (nixpkgsConfig // { inherit system; });
       in {
         formatter = pkgs.alejandra;
-        devShell = import ./shell.nix {inherit pkgs;};
+        devShell = import ./shell.nix { inherit pkgs; };
+        packages = import ./pkgs { inherit pkgs nixpkgs; };
       }
     );
 }

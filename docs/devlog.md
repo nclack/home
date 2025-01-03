@@ -1,5 +1,16 @@
 # 2025-01-03
 
+## Plan
+
+- [x] appimage support
+- [x] systemd service timeout
+- [x] try out cursor
+- [x] windsurf flake
+- [ ] try out windsurf
+- [ ] add an os keyring (gnome-keyring)
+
+## Notes
+
 I want to try the cursor ide which is downloadable as an appimage. I can
 apparently [enable support](https://wiki.nixos.org/wiki/Appimage) pretty 
 easily. I've enabled appimage support in both oreb and gyoll.
@@ -8,7 +19,7 @@ I've also enabled systemd service timeout in both oreb and gyoll.
 
 # 2024-12-21
 
-- [ ] was redoing my swaps, didn't quite finish the last time I left off...
+- [x] was redoing my swaps, didn't quite finish the last time I left off...
 
 # 2024-12-10
 
