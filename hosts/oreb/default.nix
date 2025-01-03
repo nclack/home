@@ -90,6 +90,10 @@
 
   programs = {
     fish.enable = true;
+    appimage = {
+      enable = true;
+      binfmt = true;
+    };
   };
 
   # This value determines the NixOS release from which the default
