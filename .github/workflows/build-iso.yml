@@ -35,9 +35,9 @@ jobs:
             --print-build-logs
           
           # Find and copy the ISO
-          ISO_PATH=$(find result/iso -name "*.iso" -type f)
+          ISO_PATH=$(find result -name "*.iso" -type f)
           if [ -z "$ISO_PATH" ]; then
-            echo "No ISO file found in result/iso"
+            echo "No ISO file found"
             exit 1
           fi
           cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"

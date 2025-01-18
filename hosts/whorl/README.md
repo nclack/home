@@ -16,11 +16,20 @@ The ISO will be available at `result/iso/whorl-utm.iso`
 
 #### Building via GitHub Actions
 
-You can trigger a GitHub Actions build of the ISO by:
-1. Going to the Actions tab in the repository
-2. Selecting the "Build ISO" workflow
-3. Clicking "Run workflow"
-4. Once complete, download the ISO from the workflow artifacts
+The ISO is automatically built when a new version tag is pushed. To trigger a build:
+
+1. Create and push a new version tag:
+   ```bash
+   git tag v1.0.0  # Use appropriate version
+   git push origin v1.0.0
+   ```
+
+2. The GitHub Actions workflow will:
+   - Build the ISO for aarch64-linux
+   - Create a new release with the ISO
+   - Name the ISO file as `whorl-utm-YYYYMMDD-vX.X.X.iso`
+
+3. Once complete, download the ISO from the Releases page
 
 ### VM Setup
 1. Create a new UTM VM with:

@@ -15,10 +15,7 @@
   # ISO-specific settings
   isoImage = {
     edition = "whorl-utm";
-    # Make ISO as minimal as possible
-    compressImage = true;
-    squashfsCompression = "zstd -Xcompression-level 6";
-    # Include the flake in the ISO
+    # Remove compression settings
     contents = [
       {
         source = ../../.;  # Copy the entire flake
