@@ -30,11 +30,11 @@ jobs:
 
       - name: Build ISO
         run: |
-          nix build .#whorl.iso \
+          nix build .#nixosConfigurations.whorl-iso.config.system.build.isoImage \
             --system aarch64-linux \
             --print-build-logs
           
-          cp result "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
+          cp result/iso/nixos.iso "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
 
       - name: Create Release
         id: create_release
