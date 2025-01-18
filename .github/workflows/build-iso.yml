@@ -34,7 +34,15 @@ jobs:
             --system aarch64-linux \
             --print-build-logs
           
-          cp result/iso/nixos.iso "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
+          # Debug: Show what result points to
+          readlink -f result
+          
+          # Debug: Show the contents of the directory
+          ls -la $(readlink -f result)
+          
+          # Copy using the full resolved path
+          ISO_PATH=$(readlink -f result)
+          cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
 
       - name: Create Release
         id: create_release
