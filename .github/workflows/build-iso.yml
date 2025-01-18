@@ -30,17 +30,11 @@ jobs:
 
       - name: Build ISO
         run: |
-          nix build .#nixosConfigurations.whorl-iso.config.system.build.isoImage \
+          nix build .#whorl.iso \
             --system aarch64-linux \
             --print-build-logs
           
-          # Find and copy the ISO
-          ISO_PATH=$(find result -name "*.iso" -type f)
-          if [ -z "$ISO_PATH" ]; then
-            echo "No ISO file found"
-            exit 1
-          fi
-          cp "$ISO_PATH" "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
+          cp result "whorl-utm-$(date +%Y%m%d)-${{ github.ref_name }}.iso"
 
       - name: Create Release
         id: create_release
