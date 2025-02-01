@@ -31,72 +31,7 @@
     vim
     git
     # Add script for automated installation
-    (writeScriptBin "install-whorl" ''
-      #!${pkgs.bash}/bin/bash
-      set -e
-
-      # Default disk is /dev/vda for UTM VMs
-      DISK="/dev/vda"
-      DEFAULT_PASSWORD="whorl"  # This will be the initial root password
-
-      echo "Starting automated Whorl installation on $DISK..."
-
-      # Partition the disk
-      parted -s $DISK -- mklabel gpt
-      parted -s $DISK -- mkpart ESP fat32 1MiB 512MiB
-      parted -s $DISK -- set 1 esp on
-      parted -s $DISK -- mkpart primary 512MiB 100%
-
-      # Format partitions
-      mkfs.fat -F 32 -n boot ''${DISK}1
-      mkfs.ext4 -L nixos ''${DISK}2
-
-      # Mount partitions
-      mount ''${DISK}2 /mnt
-      mkdir -p /mnt/boot
-      mount ''${DISK}1 /mnt/boot
-
-      # Generate initial config
-      nixos-generate-config --root /mnt
-
-      # Copy the flake to the target system
-      mkdir -p /mnt/etc/nixos
-      cp -r /etc/nixos/whorl /mnt/etc/nixos/
-
-      # Create a custom configuration.nix
-      cat > /mnt/etc/nixos/configuration.nix << EOF
-      { config, pkgs, ... }:
-      {
-        imports = [
-          ./hardware-configuration.nix
-          ./whorl/hosts/whorl/default.nix
-        ];
-
-        # UTM-specific settings
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
-
-        # Enable guest additions
-        virtualisation.vmware.guest.enable = true;
-
-        # Any additional VM-specific settings can go here
-      }
-      EOF
-
-      # Install NixOS
-      echo "Installing NixOS..."
-      nixos-install --no-root-passwd
-
-      # Set root password
-      echo "Setting root password to: $DEFAULT_PASSWORD"
-      echo "root:$DEFAULT_PASSWORD" | chpasswd -R /mnt
-
-      echo "Installation complete!"
-      echo "You can now:"
-      echo "1. Reboot the system: 'reboot'"
-      echo "2. Log in as root with password: $DEFAULT_PASSWORD"
-      echo "3. Change the root password using 'passwd'"
-    '')
+    (writeScriptBin "install-whorl" (builtins.readFile ./install-whorl.sh))
   ];
 
   # Networking configuration - override the default to avoid conflicts
@@ -119,13 +54,17 @@
     };
   };
 
-  # Keep only essential kernel modules for UTM
+  # Keep only essential kernel modules for QEMU/KVM
   boot.initrd.availableKernelModules = [
     "virtio_pci"
     "virtio_blk"
     "virtio_net"
     "virtio_balloon"
     "virtio_console"
+    "virtio_rng"    # Add random number generator
+    "9p"            # For 9P filesystem support
+    "9pnet"         # For 9P network support
+    "9pnet_virtio"  # For 9P virtio support
   ];
 
   # Ensure proper architecture
