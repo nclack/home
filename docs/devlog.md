@@ -1,3 +1,23 @@
+# 2024-03-08
+
+## Plan
+
+- [ ] gyoll: update to latest cosmic
+
+## Notes
+
+On gyoll, I realized using the usb-c out of the nvidia card is just not a 
+good idea. It also means using my thunderbolt dock which adds some complexity
+and isn't really the desired solution anyway - I have to manually plug and 
+unplug to switch computers.
+
+All monitors these days come with two inputs. The MSI I use as the my main
+monitory also has a KVM. 
+
+So I rewired things appropriately and it look like things are working better.
+I didn see a glitch on chrome the first time I booted up. But it's just on
+chrome so far.
+
 # 2024-12-28
 
 Still having trouble with nvidia drivers.
