@@ -54,7 +54,7 @@
     "autovt@tty1".enable = false;
   };
 
-  systemd.extraConfig=''
+  systemd.extraConfig = ''
     DefaultTimeoutStopSec=15s
   '';
 }

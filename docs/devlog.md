@@ -1,8 +1,30 @@
+# 2024-03-09
+
+## Plan
+
+- [ ] Play with adding claude-code
+
+## Notes
+
+Claude-code is a npm package so I thought about adding it via home-manager.
+That ends up just being
+1. Install npm
+2. Hook the claude command to install the package on first invocation
+
+That made me re-think a bit. I really just need it in specific dev shells. 
+So I added it to the dev shell for this repo. That works great.
+
+I looked into what it would take to add it to dev shells in a more modular
+way - maybe via a flake. I might set up this, or another repo, to contain
+flakes I can import. I tend to need to do this a lot for dev shells. It's 
+awkward to do this for flakes though - there's this weird syntax around
+selecting the platform.
+
 # 2024-03-08
 
 ## Plan
 
-- [ ] gyoll: update to latest cosmic
+- [x] gyoll: update to latest cosmic
 
 ## Notes
 
