@@ -22,6 +22,7 @@ sudo nixos-rebuild switch --flake /home/nclack/src/home#hostname
 - Follow functional programming practices
 - Use comments to explain complex configurations
 - Leverage NixOS modules for reusability
+- Git commit messages: single line, max 74 characters
 
 ## Repository Structure
 - `/hosts/` - Machine-specific configurations

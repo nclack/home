@@ -50,19 +50,23 @@
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
+    # Using beta drivers to address graphical glitches with stable version
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
+    # Using closed drivers for better stability with external displays
     open = false;
     nvidiaSettings = true;
+    # Disabled for better compatibility with display switching
     nvidiaPersistenced = false;
     dynamicBoost.enable = false;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    # prime = {
-    #   sync.enable = true;
-    #   intelBusId = "PCI:0:2:0";
-    #   nvidiaBusId = "PCI:1:0:0";
-    # };
+    # PRIME configuration for hybrid Intel/NVIDIA graphics
+    prime = {
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
   # Razer Thunderbolt 4 Dock

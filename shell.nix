@@ -33,12 +33,14 @@ in
       export EDITOR=hx
       
       # Configure npm to use a different directory for global packages
-      mkdir -p $HOME/.npm-packages
-      npm config set prefix $HOME/.npm-packages
+      if [ ! -d "$HOME/.npm-packages" ]; then
+        mkdir -p $HOME/.npm-packages
+        npm config set prefix $HOME/.npm-packages
+      fi
       export PATH="$HOME/.npm-packages/bin:$PATH"
       
       # Install @anthropic-ai/claude-code if not already available
-      if ! command -v claude &> /dev/null; then
+      if ! command -v claude &> /dev/null && [ ! -f "$HOME/.npm-packages/bin/claude" ]; then
         echo "Installing @anthropic-ai/claude-code..."
         npm install -g @anthropic-ai/claude-code
       fi

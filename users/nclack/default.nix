@@ -54,6 +54,7 @@
     "autovt@tty1".enable = false;
   };
 
+  # Reduce shutdown waiting time to speed up system restart/shutdown
   systemd.extraConfig = ''
     DefaultTimeoutStopSec=15s
   '';
