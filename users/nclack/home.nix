@@ -9,6 +9,7 @@
     ./lib/fish.nix
     ./lib/git
     ./lib/packages.nix
+    ./lib/claude-code.nix
   ];
 
   home = {
