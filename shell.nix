@@ -3,6 +3,9 @@
     function fish_right_prompt
         echo -n (set_color blue)"[dev home] "(set_color normal)
     end
+    
+    # Add npm global bin to PATH
+    set -gx PATH $HOME/.npm-packages/bin $PATH
   '';
 in
   pkgs.mkShell {
@@ -21,10 +24,27 @@ in
       fzf
       ripgrep
       tree
+      
+      nodejs
+      nodePackages.npm
     ];
 
     shellHook = ''
       export EDITOR=hx
+      
+      # Configure npm to use a different directory for global packages
+      if [ ! -d "$HOME/.npm-packages" ]; then
+        mkdir -p $HOME/.npm-packages
+        npm config set prefix $HOME/.npm-packages
+      fi
+      export PATH="$HOME/.npm-packages/bin:$PATH"
+      
+      # Install @anthropic-ai/claude-code if not already available
+      if ! command -v claude &> /dev/null && [ ! -f "$HOME/.npm-packages/bin/claude" ]; then
+        echo "Installing @anthropic-ai/claude-code..."
+        npm install -g @anthropic-ai/claude-code
+      fi
+      
       exec fish -C "source ${fishConfig}"
     '';
 

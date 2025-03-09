@@ -50,14 +50,18 @@
   hardware.graphics.enable = true;
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # Using beta drivers to address graphical glitches with stable version
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     modesetting.enable = true;
-    open = true;
+    # Using closed drivers for better stability with external displays
+    open = false;
     nvidiaSettings = true;
-    nvidiaPersistenced = true;
-    dynamicBoost.enable = true;
+    # Disabled for better compatibility with display switching
+    nvidiaPersistenced = false;
+    dynamicBoost.enable = false;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
+    # PRIME configuration for hybrid Intel/NVIDIA graphics
     prime = {
       sync.enable = true;
       intelBusId = "PCI:0:2:0";

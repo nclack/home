@@ -1,3 +1,57 @@
+# 2024-03-09
+
+## Plan
+
+- [ ] Play with adding claude-code
+
+## Notes
+
+Claude-code is a npm package so I thought about adding it via home-manager.
+That ends up just being
+1. Install npm
+2. Hook the claude command to install the package on first invocation
+
+That made me re-think a bit. I really just need it in specific dev shells. 
+So I added it to the dev shell for this repo. That works great.
+
+I looked into what it would take to add it to dev shells in a more modular
+way - maybe via a flake. I might set up this, or another repo, to contain
+flakes I can import. I tend to need to do this a lot for dev shells. It's 
+awkward to do this for flakes though - there's this weird syntax around
+selecting the platform.
+
+# 2024-03-08
+
+## Plan
+
+- [x] gyoll: update to latest cosmic
+
+## Notes
+
+On gyoll, I realized using the usb-c out of the nvidia card is just not a 
+good idea. It also means using my thunderbolt dock which adds some complexity
+and isn't really the desired solution anyway - I have to manually plug and 
+unplug to switch computers.
+
+All monitors these days come with two inputs. The MSI I use as the my main
+monitory also has a KVM. 
+
+So I rewired things appropriately and it look like things are working better.
+I didn see a glitch on chrome the first time I booted up. But it's just on
+chrome so far.
+
+# 2024-12-28
+
+Still having trouble with nvidia drivers.
+ - graphical glitches
+ - usb c on startup
+
+For the second one, I might have found a useful link:
+
+https://download.nvidia.com/XFree86/Linux-x86_64/460.73.01/README/dynamicpowermanagement.html
+
+I haven't tried anything yet.
+
 # 2024-12-21
 
 - [ ] was redoing my swaps, didn't quite finish the last time I left off...
