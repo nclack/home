@@ -4,7 +4,21 @@
 
 - [x] update oreb
 - [x] add claude-code to dev shell
+- [x] figure out how to upgrade cursor more easily
 - [ ] switch to hyprland
+
+## Notes
+
+Decided to use cosmic's built-in AppImage support for managing Cursor IDE updates rather than including it in nix config. Both oreb and gyoll already have AppImage support enabled with:
+
+```nix
+programs.appimage = {
+  enable = true;
+  binfmt = true;
+};
+```
+
+This allows the cosmic desktop environment to handle Cursor updates without needing to modify nix configuration files.
 
 # 2025-01-03
 
