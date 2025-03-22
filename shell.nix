@@ -3,6 +3,9 @@
     function fish_right_prompt
         echo -n (set_color blue)"[dev home] "(set_color normal)
     end
+
+    # Create an alias for claude-code using npx
+    alias claude="npx @anthropic-ai/claude-code"
   '';
 in
   pkgs.mkShell {
@@ -21,6 +24,9 @@ in
       fzf
       ripgrep
       tree
+
+      # For claude-code
+      nodejs
     ];
 
     shellHook = ''

@@ -1,3 +1,11 @@
+# 2025-03-22
+
+## Plan
+
+- [x] update oreb
+- [x] add claude-code to dev shell
+- [ ] switch to hyprland
+
 # 2025-01-03
 
 ## Plan

@@ -18,7 +18,7 @@
     # Remove compression settings
     contents = [
       {
-        source = ../../.;  # Copy the entire flake
+        source = ../../.; # Copy the entire flake
         target = "/etc/nixos/whorl";
       }
     ];
@@ -61,10 +61,10 @@
     "virtio_net"
     "virtio_balloon"
     "virtio_console"
-    "virtio_rng"    # Add random number generator
-    "9p"            # For 9P filesystem support
-    "9pnet"         # For 9P network support
-    "9pnet_virtio"  # For 9P virtio support
+    "virtio_rng" # Add random number generator
+    "9p" # For 9P filesystem support
+    "9pnet" # For 9P network support
+    "9pnet_virtio" # For 9P virtio support
   ];
 
   # Ensure proper architecture
