@@ -17,21 +17,17 @@
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/085aa8cb-46db-498f-8ccb-692b71b6ca59";
-    fsType = "ext4";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/b63ad598-c8a9-4381-91ed-2f74b0518f65";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/FC26-3948";
-    fsType = "vfat";
-  };
-
-  fileSystems."/mnt/shared" = {
-    device = "share";
-    fsType = "9p";
-    options = ["trans=virtio" "version=9p2000.L" "rw"];
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/0759-7570";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+    
 
   swapDevices = [];
 

@@ -13,20 +13,31 @@
   disabledModules = ["./hardware-configuration.nix"];
 
   # ISO-specific settings
-  isoImage.edition = "whorl-utm";
+  isoImage = {
+    edition = "whorl-utm";
+    # Remove compression settings
+    contents = [
+      {
+        source = ../../.;  # Copy the entire flake
+        target = "/etc/nixos/whorl";
+      }
+    ];
+  };
 
-  # Essential tools for installation
+  # Essential tools for installation - keeping only what's absolutely necessary
   environment.systemPackages = with pkgs; [
     parted
     gptfdisk
     vim
+    git
+    # Add script for automated installation
+    (writeScriptBin "install-whorl" (builtins.readFile ./install-whorl.sh))
   ];
 
   # Networking configuration - override the default to avoid conflicts
   networking = lib.mkForce {
     hostName = "whorl-installer";
     networkmanager.enable = true;
-    # Disable wireless to avoid conflict with NetworkManager
     wireless.enable = false;
     firewall = {
       enable = true;
@@ -34,24 +45,37 @@
     };
   };
 
-  # Remove specific filesystem mounts
+  # Minimal tmpfs root
   fileSystems = lib.mkForce {
     "/" = {
       device = "none";
       fsType = "tmpfs";
-      options = ["size=2G" "mode=755"];
+      options = ["size=1G" "mode=755"]; # Reduced from 2G to 1G
     };
   };
 
-  # Keep the QEMU guest support but remove specific device configurations
+  # Keep only essential kernel modules for QEMU/KVM
   boot.initrd.availableKernelModules = [
-    "xhci_pci"
     "virtio_pci"
-    "usbhid"
-    "usb_storage"
-    "sr_mod"
+    "virtio_blk"
+    "virtio_net"
+    "virtio_balloon"
+    "virtio_console"
+    "virtio_rng"    # Add random number generator
+    "9p"            # For 9P filesystem support
+    "9pnet"         # For 9P network support
+    "9pnet_virtio"  # For 9P virtio support
   ];
 
   # Ensure proper architecture
   nixpkgs.hostPlatform = "aarch64-linux";
+
+  # Disable unnecessary services
+  services.xserver.enable = false;
+  services.printing.enable = false;
+  services.pipewire.enable = false;
+  documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.man.enable = false;
+  documentation.info.enable = false;
 }
