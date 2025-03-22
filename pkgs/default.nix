@@ -6,8 +6,7 @@
   # Import all package definitions
   callPackage = pkgs.lib.callPackageWith (pkgs // self);
   self = {
-    # Add your custom packages here
-    example = callPackage ./example {};
+    # cursor = callPackage ./cursor.nix {}; # FIXME: can't download AppImage due to some SSL error
     windsurf = callPackage ./windsurf.nix {inherit nixpkgs;};
   };
 in

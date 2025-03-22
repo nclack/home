@@ -20,5 +20,6 @@
     typos-lsp
     # GUI applications
     windsurf
+    # cursor
   ];
 }

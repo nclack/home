@@ -6,7 +6,7 @@
 - [x] systemd service timeout
 - [x] try out cursor
 - [x] windsurf flake
-- [ ] try out windsurf
+- [x] try out windsurf
 - [ ] add an os keyring (gnome-keyring)
 
 ## Notes

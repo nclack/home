@@ -23,11 +23,12 @@
     ...
   } @ inputs: let
     # Function to create an overlay for custom packages
-    overlay = final: prev: import ./pkgs { 
-      pkgs = final; 
-      inherit nixpkgs;
-    };
-    
+    overlay = final: prev:
+      import ./pkgs {
+        pkgs = final;
+        inherit nixpkgs;
+      };
+
     # Common nixpkgs configuration
     nixpkgsConfig = {
       config = {
@@ -84,11 +85,11 @@
     }
     // flake-utils.lib.eachDefaultSystem (
       system: let
-        pkgs = import nixpkgs (nixpkgsConfig // { inherit system; });
+        pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
       in {
         formatter = pkgs.alejandra;
-        devShell = import ./shell.nix { inherit pkgs; };
-        packages = import ./pkgs { inherit pkgs nixpkgs; };
+        devShell = import ./shell.nix {inherit pkgs;};
+        packages = import ./pkgs {inherit pkgs nixpkgs;};
       }
     );
 }
