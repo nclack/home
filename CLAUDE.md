@@ -25,3 +25,10 @@
 - Reuse code through the lib directory
 - Document non-obvious configurations
 - Keep customizations self-contained when possible
+
+## Commits
+- Commit messages should be 1 line max (80 chars). Prefer two or three word messages.
+- If changes are specific to a host, note the host in the commit message.
+- Commits should be attributed to the user
+- Break logically different sets of changes into separate commits
+- Commit message should explain why the change was made, not just what was changed
