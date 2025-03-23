@@ -3,6 +3,7 @@
   config,
   ...
 }: {
+  programs.man.enable = false;
   programs.home-manager.enable = true;
 
   imports = [

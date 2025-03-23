@@ -8,9 +8,24 @@
   # Use Hyprland program explicitly from the flake input
   wayland.windowManager.hyprland = {
     enable = true;
-    # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    systemd.enable = true;
+    xwayland.enable = true;
+    package = null;  # Let the system-level package handle this
+    portalPackage = null; # Let the system-level package handle this
+    settings = {
+      # Add basic Hyprland configuration
+      general = {
+        gaps_in = 5;
+        gaps_out = 10;
+        border_size = 2;
+      };
+      decoration = {
+        rounding = 5;
+      };
+      input = {
+        follow_mouse = 1;
+      };
+    };
   };
 
   home.packages = with pkgs; [

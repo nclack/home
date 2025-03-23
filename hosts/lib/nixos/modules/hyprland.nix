@@ -35,7 +35,7 @@ in {
     xdg.portal = {
       enable = true;
       extraPortals = [
-        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
       ];
       wlr.enable = true;
     };
@@ -51,6 +51,7 @@ in {
       libGL
       libGLU
       libdrm
+      libgbm
 
       # Authentication
       polkit_gnome
@@ -60,6 +61,11 @@ in {
     programs.appimage = {
       enable = true;
       binfmt = true;
+    };
+
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
     };
   };
 }
