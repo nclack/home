@@ -7,7 +7,49 @@
 - [x] figure out how to upgrade cursor more easily
 - [ ] switch to hyprland
 
+## Hyprland approach
+
+Instructions for hyprland with nixos are [here](https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/).
+Use with cachix is [here](https://wiki.hyprland.org/Nix/Cachix/).
+Use with home-manager is [here](https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/).
+
+- Add Hyprland cachix to speed up builds
+- use greetd/tuigreet as login manager
+- use swaync for notifications using the catppuccin mocha theme
+- use waybar with catpuccin mocha theme
+- use swww and wallrizz for wallpapers
+- tofi as the app launcher
+- clipse as the clipboard manager
+- for the file manager
+  - for tui: use yazi. this optionally depends on nerd-fonts, ffmpeg, 7zip, jq,  poppler, fd, rg, fzf, zoxide, imagemagick and wl-clipboard
+  - for gui use nemo
+- use ghostty for the terminal
+- flameshot for screenshots
+- Include all official Hyprland ecosystem packages:
+  - hypridle - idle management daemon
+  - hyprlock - screen locker
+  - hyprpicker - color picker
+  - xdg-desktop-portal-hyprland - for proper app integrations
+  - hyprsysteminfo - system status monitor
+  - hyprsunset - adaptive screen temperature
+  - hyprpolkitagent - polkit integration
+  - hyprland-qt-support - Qt theming
+  - hyprcursor - cursor theming
+  - hyprutils - utility libraries
+  - hyprlang - configuration language
+  - hyprland-qtutils - additional Qt support
+
+This is for a laptop, so I also need tools for power management and brightness
+control:
+- brightnessctl for screen brightness
+- hypridle for power management
+
+Use catppuccin mocha to theme all apps.
+
+For any other tools I need: prefer gnome to kde. Prefer hyprland ecosystem tools.
+
 ## Notes
+
 
 Decided to use cosmic's built-in AppImage support for managing Cursor IDE updates rather than including it in nix config. Both oreb and gyoll already have AppImage support enabled with:
 

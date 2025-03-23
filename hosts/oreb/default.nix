@@ -16,8 +16,14 @@
   ];
 
   nix.settings = {
-    substituters = ["https://cosmic.cachix.org/"];
-    trusted-public-keys = ["cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="];
+    substituters = [
+      "https://cosmic.cachix.org/"
+      "https://hyprland.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+    ];
   };
 
   # Bootloader.
@@ -39,10 +45,13 @@
     powerOnBoot = true;
   };
 
+  hardware.opengl = {
+    enable = true;
+  };
+
   services.flatpak.enable = true;
 
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
+  services.hyprland-desktop.enable = true;
 
   # Set global systemd service timeout
   systemd.extraConfig = ''

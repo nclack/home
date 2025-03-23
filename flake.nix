@@ -3,14 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixos-cosmic = {
       url = "github:lilyinstarlight/nixos-cosmic";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
     };
   };
 
@@ -20,6 +24,7 @@
     home-manager,
     flake-utils,
     nixos-cosmic,
+    hyprland,
     ...
   } @ inputs: let
     # Function to create an overlay for custom packages
@@ -37,6 +42,7 @@
       overlays = [
         overlay
         nixos-cosmic.overlays.default
+        hyprland.overlays.default
       ];
     };
 

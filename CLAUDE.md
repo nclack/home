@@ -19,6 +19,8 @@
 - Naming: camelCase for functions, kebab-case for files
 - Imports: group by functionality
 - Error handling: use descriptive error messages
+- Don't leave obvious comments
+- Delete old code rather than commenting it out
 
 ## Conventions
 - Split config by host, extract common modules
