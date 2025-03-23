@@ -5,7 +5,7 @@
     end
 
     # Create an alias for claude-code using npx
-    alias claude="npx @anthropic-ai/claude-code"
+    alias claude="npx @anthropic-ai/claude-code@latest"
   '';
 in
   pkgs.mkShell {

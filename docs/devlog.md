@@ -1,3 +1,51 @@
+# 2025-03-23
+
+## Plan
+
+- [x] keybinds
+  - kill a window with mod+backspace (changed from mod+q)
+  - maximize a window with mod+f
+  - open a browser mod+b (using google-chrome-stable)
+  - open the terminal with mod+enter
+  - move windows to workspaces with arrows
+  - change workspaces with arrows
+  - mirror all arrow actions to hjkl
+  - use a bind subgroup and binde for window resize
+    - added red border color indicator for resize mode
+    - can exit resize mode with mod+r or escape
+- [x] reverse scroll direction
+- [x] tuigreet
+  - theme is like catppuccin mocha
+  - enable the user-menu and remember the last user
+  - display the time
+- [x] ghostty
+  - reduce the default font size a little
+  - add some transparency to the window: 90% opaque.
+- [x] improve electron app appearance
+  - added NIXOS_OZONE_WL=1 for Electron native Wayland support
+  - added QT theming with qtwayland and kvantum
+  - set proper environment variables for all GUI frameworks
+- [x] waybar looks need to improve
+  - adapt this [config](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/config)
+  - use this [style.css](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/style.css)
+    with this [mocha.css](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/mocha.css)
+- [ ] tofi
+  - half the size, it's too big
+  - theme should match catppuccin mocha
+- [x] authentication pop up
+  - use hyprpolkitagent
+- [ ] hyprpolkitagent dark color theme
+- [ ] generally, my key repeat settings are too slow. decrease delay and
+      increase frequency.
+- [ ] add indicators for volume change etc
+
+## Notes
+
+- [yorha] looks amazing
+
+[yorha]: https://github.com/flickowoa/dotfiles/tree/hyprland-yorha
+
+
 # 2025-03-22
 
 ## Plan
@@ -5,7 +53,7 @@
 - [x] update oreb
 - [x] add claude-code to dev shell
 - [x] figure out how to upgrade cursor more easily
-- [ ] switch to hyprland
+- [x] switch to hyprland
 
 ## Hyprland approach
 
@@ -50,8 +98,11 @@ For any other tools I need: prefer gnome to kde. Prefer hyprland ecosystem tools
 
 ## Notes
 
+### Appimage
 
-Decided to use cosmic's built-in AppImage support for managing Cursor IDE updates rather than including it in nix config. Both oreb and gyoll already have AppImage support enabled with:
+Decided to use cosmic's built-in AppImage support for managing Cursor IDE
+updates rather than including it in nix config. Both oreb and gyoll already have
+AppImage support enabled with:
 
 ```nix
 programs.appimage = {
@@ -60,7 +111,20 @@ programs.appimage = {
 };
 ```
 
-This allows the cosmic desktop environment to handle Cursor updates without needing to modify nix configuration files.
+This allows the cosmic desktop environment to handle Cursor updates without
+needing to modify nix configuration files.
+
+### Hyprland
+
+I needed to switch to nixos-unstable to get everything to work. I think I
+might have been looking at the wrong version of the hyprland docs, which
+wanted some new stuff. The main lesson was everything (nixos, homemanager, etc)
+need to be running off an agreed set of versions - nixos-stable with the
+corresponding hyprland would probably have been fine.
+
+There is a tremendous amount of configuration to do and I definitely miss
+parts of cosmic. Though it seems hyprland handles games better. It's just
+I have to think about everything for a bit.
 
 # 2025-01-03
 

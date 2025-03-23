@@ -20,5 +20,10 @@
     typos-lsp
     # GUI applications
     windsurf
+    
+    # Fonts
+    jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    font-awesome
   ];
 }

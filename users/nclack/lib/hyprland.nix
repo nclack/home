@@ -10,7 +10,7 @@
     enable = true;
     systemd.enable = true;
     xwayland.enable = true;
-    package = null;  # Let the system-level package handle this
+    package = null; # Let the system-level package handle this
     portalPackage = null; # Let the system-level package handle this
     settings = {
       # Add basic Hyprland configuration
@@ -47,6 +47,11 @@
     # Waybar
     waybar
 
+    # Themes
+    catppuccin-gtk
+    catppuccin-cursors
+    papirus-icon-theme
+
     # Wallpaper tools
     swww
     # wallrizz
@@ -61,8 +66,9 @@
     yazi # TUI
     nemo # GUI
 
-    # Terminal
+    # Terminals
     ghostty
+    kitty
 
     # Screenshots
     flameshot
@@ -80,6 +86,10 @@
     fzf
     zoxide
     imagemagick
+
+    # Waybar dependencies
+    wlogout
+    playerctl
   ];
 
   # Create basic Hyprland configuration directory
@@ -87,5 +97,10 @@
     target = "hypr";
     recursive = true;
     source = ../config/hypr;
+  };
+  xdg.configFile."waybar" = {
+    target = "waybar";
+    recursive = true;
+    source = ../config/waybar;
   };
 }

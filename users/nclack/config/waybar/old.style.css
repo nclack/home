@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Font Awesome 6 Brands";
     font-size: 14px;
     min-height: 0;
 }
@@ -18,13 +18,20 @@ window#waybar.hidden {
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: #cdd6f4;
+    color: #6c7086;
     border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
 }
 
 #workspaces button.active {
     background: #1e1e2e;
+    color: #cdd6f4;
     border-bottom: 3px solid #cba6f7;
+}
+
+#workspaces button.occupied {
+    color: #a6adc8;
+    border-bottom: 3px solid #45475a;
 }
 
 #workspaces button.urgent {
