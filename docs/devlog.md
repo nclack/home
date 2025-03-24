@@ -29,7 +29,7 @@
   - adapt this [config](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/config)
   - use this [style.css](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/style.css)
     with this [mocha.css](https://raw.githubusercontent.com/rubyowo/dotfiles/f925cf8e3461420a21b6dc8b8ad1190107b0cc56/config/waybar/mocha.css)
-- [ ] tofi
+- [x] tofi
   - half the size, it's too big
   - theme should match catppuccin mocha
 - [x] authentication pop up
