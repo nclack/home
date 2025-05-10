@@ -1,3 +1,9 @@
+# 2025-05-10
+
+## Plan
+
+- [ ] setup a UTM nixos vm on the new mac, replacing the old whorl
+
 # 2025-03-22
 
 ## Plan
