@@ -13,6 +13,7 @@ in
       alejandra
       helix
       nil
+      nixd
       markdown-oxide
       marksman
       xclip
