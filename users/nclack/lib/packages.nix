@@ -18,9 +18,7 @@
     ripgrep
     tree
     typos-lsp
-    # GUI applications
-    windsurf
-    
+
     # Fonts
     jetbrains-mono
     nerd-fonts.jetbrains-mono

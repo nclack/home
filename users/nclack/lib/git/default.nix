@@ -1,16 +1,17 @@
 {
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
+    };
+  };
   programs.git = {
     enable = true;
-    userName = "Nathan Clack";
-    userEmail = "nclack@gmail.com";
     ignores = import ./ignores.nix;
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-      };
-    };
-    extraConfig = {
+    settings = {
+      user.name = "Nathan Clack";
+      user.email = "nclack@gmail.com";
       init.defaultBranch = "main";
       alias = {
         br = "branch";

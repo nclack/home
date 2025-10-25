@@ -9,42 +9,19 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
-    self,
     nixpkgs,
-    home-manager,
     flake-utils,
-    nixos-cosmic,
-    hyprland,
     ...
   } @ inputs: let
-    # Function to create an overlay for custom packages
-    overlay = final: prev:
-      import ./pkgs {
-        pkgs = final;
-        inherit nixpkgs;
-      };
-
     # Common nixpkgs configuration
     nixpkgsConfig = {
       config = {
         allowUnfree = true;
       };
-      overlays = [
-        overlay
-        nixos-cosmic.overlays.default
-        hyprland.overlays.default
-      ];
+      overlays = [];
     };
 
     mkNixos = hostname: system:
@@ -87,8 +64,6 @@
 
         whorl-iso = mkIso "whorl" "aarch64-linux";
       };
-
-      overlays.default = overlay;
     }
     // flake-utils.lib.eachDefaultSystem (
       system: let
@@ -96,7 +71,6 @@
       in {
         formatter = pkgs.alejandra;
         devShell = import ./shell.nix {inherit pkgs;};
-        packages = import ./pkgs {inherit pkgs nixpkgs;};
       }
     );
 }
