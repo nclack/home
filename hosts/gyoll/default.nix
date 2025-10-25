@@ -8,24 +8,12 @@
   ...
 }: {
   imports = [
-    inputs.nixos-cosmic.nixosModules.default
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./keyboard.nix
     # common ssh, local and nix settings  (flakes, unfree)
-    ../lib/nixos
+    ../../modules
   ];
-
-  nix.settings = {
-    substituters = [
-      "https://cosmic.cachix.org/"
-      "https://nix-community.cachix.org/"
-    ];
-    trusted-public-keys = [
-      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
