@@ -23,5 +23,7 @@
     jetbrains-mono
     nerd-fonts.jetbrains-mono
     font-awesome
+
+    obs-studio
   ];
 }
