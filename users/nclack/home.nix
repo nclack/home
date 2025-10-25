@@ -8,9 +8,9 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./lib/fish.nix
-    ./lib/git
-    ./lib/packages.nix
+    ./modules/fish.nix
+    ./modules/git
+    ./modules/packages.nix
   ];
 
   home = {

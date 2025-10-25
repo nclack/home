@@ -1,3 +1,10 @@
+# 2025-10-24
+
+- Fixed COSMIC desktop installation on oreb and gyoll by switching from the nixos-cosmic flake (which had hash mismatch errors) to using COSMIC packages directly from nixpkgs.
+- Directory Restructure
+- Removed Dead/Broken Code
+- Documentation Updates
+
 # 2025-03-23
 
 ## Plan

@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
     ./keyboard.nix
     # common ssh, local and nix settings  (flakes, unfree)
-    ../lib/nixos
+    ../../modules
   ];
 
   # Bootloader.

@@ -21,7 +21,6 @@
       config = {
         allowUnfree = true;
       };
-      overlays = [];
     };
 
     mkNixos = hostname: system:
