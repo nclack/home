@@ -6,6 +6,7 @@
 }: {
   home.packages = with pkgs; [
     bat
+    claude-code
     delta
     eza
     fd
@@ -27,6 +28,8 @@
     typos-lsp
     vim # provides xxd
     w3m
+    xclip
+    zoxide
 
     # Fonts
     jetbrains-mono
