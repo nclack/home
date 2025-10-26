@@ -1,0 +1,5 @@
+
+
+export NB_AUTO_SYNC="${NB_AUTO_SYNC:-1}" # Set by `nb` • Sat Oct 25 04:45:37 PM UTC 2025
+
+export NB_COLOR_THEME="${NB_COLOR_THEME:-desert}" # Set by `nb` • Sat Oct 25 04:45:47 PM UTC 2025
