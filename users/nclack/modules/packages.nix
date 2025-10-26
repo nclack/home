@@ -19,7 +19,7 @@
     marksman
     nb
     pandoc
-    pinentry-gnome3
+    pinentry-qt
     readability-cli
     ripgrep
     tig

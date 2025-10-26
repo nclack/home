@@ -7,6 +7,13 @@
   programs.man.enable = false;
   programs.home-manager.enable = true;
 
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-qt;
+    defaultCacheTtl = 600;
+    maxCacheTtl = 7200;
+  };
+
   imports = [
     ./modules/fish.nix
     ./modules/git
@@ -44,13 +51,6 @@
         # Match Hyprland blur aesthetics
         window-decoration = false
         window-theme = dark
-      '';
-
-      # GPG agent configuration
-      ".gnupg/gpg-agent.conf".text = ''
-        pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
-        default-cache-ttl 600
-        max-cache-ttl 7200
       '';
     };
   };
