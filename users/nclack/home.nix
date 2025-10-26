@@ -38,7 +38,10 @@
     };
 
     file = {
-      ".config/helix".source = ./config/helix;
+      ".config" = {
+        source = ./config;
+        recursive = true;
+      };
 
       # Ghostty terminal configuration
       ".config/ghostty/config".text = ''

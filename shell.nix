@@ -1,14 +1,12 @@
 {pkgs ? import <nixpkgs> {}}: let
   fishConfig = pkgs.writeText "devshell-config.fish" ''
-    function fish_right_prompt
-        echo -n (set_color blue)"[dev home] "(set_color normal)
-    end
-
     # Create an alias for claude-code using npx
     alias claude="npx @anthropic-ai/claude-code@latest"
   '';
 in
   pkgs.mkShell {
+    name = "dev-home";
+
     packages = with pkgs; [
       alejandra
       helix

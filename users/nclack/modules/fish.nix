@@ -10,4 +10,9 @@
       find = "fd";
     };
   };
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }
