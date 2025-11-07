@@ -9,7 +9,7 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentry.package = pkgs.pinentry-qt;
     defaultCacheTtl = 600;
     maxCacheTtl = 7200;
   };
@@ -38,10 +38,9 @@
     };
 
     file = {
-      ".config" = {
-        source = ./config;
-        recursive = true;
-      };
+      ".config/helix".source = ./config/helix;
+      ".config/nb".source = ./config/nb;
+      ".config/starship.toml".source = ./config/starship.toml;
 
       # Ghostty terminal configuration
       ".config/ghostty/config".text = ''

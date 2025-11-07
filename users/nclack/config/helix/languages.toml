@@ -25,6 +25,11 @@ language-servers = ["zls"]
 [language-servers.zls]
 command = "zls"
 
+[[language]]
+name = "c"
+auto-format = true
+formatter = {command = "clang-format"}
+
 
 [language-server.typos]
 command = "typos-lsp"
