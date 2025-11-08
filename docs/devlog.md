@@ -1,3 +1,7 @@
+# 2025-11-07
+
+- Added auk, a razer blade 14" 2025
+
 # 2025-10-24
 
 - Fixed COSMIC desktop installation on oreb and gyoll by switching from the nixos-cosmic flake (which had hash mismatch errors) to using COSMIC packages directly from nixpkgs.

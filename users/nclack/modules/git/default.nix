@@ -10,13 +10,15 @@
     enable = true;
     ignores = import ./ignores.nix;
     signing = {
-      key = "C42E5CBEA20D10A3";
+      key = "~/.ssh/id_ed25519.pub";
       signByDefault = true;
     };
     settings = {
       user.name = "Nathan Clack";
       user.email = "nclack@gmail.com";
       init.defaultBranch = "main";
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.config/git/allowed_signers";
       tag.gpgsign = true;
       alias = {
         br = "branch";
