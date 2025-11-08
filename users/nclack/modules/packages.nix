@@ -13,6 +13,7 @@
     fish
     fzf
     gh
+    ghostty
     git
     gnupg
     jq

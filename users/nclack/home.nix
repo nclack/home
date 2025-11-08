@@ -1,6 +1,4 @@
 {
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -43,17 +41,17 @@
         recursive = true;
       };
 
-      # Ghostty terminal configuration
       ".config/ghostty/config".text = ''
-        # Catppuccin Mocha theme
+        theme = light:solarized-light,dark:Srcery
         font-size = 11
-
-        # Add transparency (90% opaque)
-        background-opacity = 0.9
-
-        # Match Hyprland blur aesthetics
+        background-opacity = 0.95
         window-decoration = false
         window-theme = dark
+        working-directory = inherit
+      '';
+
+      ".config/git/allowed_signers".text = ''
+        nclack@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGUrV6mxvcVbyUk1S1k4ESKsyokMX2LIalgcpliE9Klf
       '';
     };
   };

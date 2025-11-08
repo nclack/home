@@ -59,6 +59,7 @@
         whorl = mkNixos "whorl" "aarch64-linux";
         oreb = mkNixos "oreb" "x86_64-linux";
         gyoll = mkNixos "gyoll" "x86_64-linux";
+        auk = mkNixos "auk" "x86_64-linux";
 
         whorl-iso = mkIso "whorl" "aarch64-linux";
       };
