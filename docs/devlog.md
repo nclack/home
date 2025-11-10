@@ -1,6 +1,19 @@
+# 2025-11-09
+
+Setting a kernel boot parameter around ACPI to lax. I've been getting some
+errors/warnings on startup. 
+
+# 2025-11-08
+
+## Suspend/Resume Issues on auk
+
+The MT7925E WiFi card was preventing suspend from working - the driver would timeout (error -110) when trying to suspend. Added workaround to disable ASPM for the WiFi driver:
+
+Ended up just unloading the driver on suspend and reloading on wake.
+
 # 2025-11-07
 
-- Added auk, a razer blade 14" 2025
+- Added auk, a 2025 razer blade 14" 
 
 # 2025-10-24
 

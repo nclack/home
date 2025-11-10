@@ -4,3 +4,7 @@ theme = "dracula_at_night"
 true-color = true
 line-number = "relative"
 rulers = [78,80]
+
+[editor.indent-guides]
+render = true
+character = "┊"

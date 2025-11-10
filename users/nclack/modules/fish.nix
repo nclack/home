@@ -7,7 +7,6 @@
     '';
     shellAliases = {
       ls = "eza";
-      find = "fd";
     };
   };
 

@@ -7,18 +7,42 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # common ssh, local and nix settings  (flakes, unfree)
     ../../modules
   ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.kernelParams = [
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "acpi_enforce_resources=lax"
+  ];
+
+  # Workaround for mt7925e suspend issues: unload WiFi before suspend
+  systemd.services.wifi-suspend-workaround = {
+    description = "Unload mt7925e WiFi driver before suspend";
+    wantedBy = [ "sleep.target" ];
+    before = [ "sleep.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.kmod}/bin/modprobe -r mt7925e";
+    };
+  };
+
+  systemd.services.wifi-resume-workaround = {
+    description = "Reload mt7925e WiFi driver after resume";
+    wantedBy = [ "suspend.target" ];
+    after = [ "suspend.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.kmod}/bin/modprobe mt7925e";
+    };
+  };
+
   networking = {
-    hostName = "${hostname}"; # Define your hostname.
+    hostName = "${hostname}";
     networkmanager.enable = true;
     firewall = {
       enable = true;
@@ -32,6 +56,14 @@
     powerOnBoot = true;
   };
 
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchDocked = "ignore";
+    HandlePowerKey = "poweroff";
+    IdleAction = "ignore";
+  };
+
   hardware.graphics = {
     enable = true;
   };
@@ -39,24 +71,16 @@
   services.xserver.videoDrivers = ["amdgpu" "nvidia"];
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     powerManagement.finegrained = false;
-    open = true;  # RTX 5070 (Blackwell) requires open kernel modules
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # PRIME configuration for hybrid graphics
     prime = {
-      # Bus IDs from lspci:
-      # AMD Radeon 890M: c5:00.0
-      # NVIDIA RTX 5070: c4:00.0
-      amdgpuBusId = "PCI:197:0:0";  # c5:00.0 in decimal
-      nvidiaBusId = "PCI:196:0:0";  # c4:00.0 in decimal
-
-      # Choose one of these modes:
-      # offload.enable = true;  # NVIDIA GPU on-demand (better battery)
-      # sync.enable = true;     # Always use NVIDIA (better performance)
-      reverseSync.enable = true;  # AMD as primary, NVIDIA for specific apps
+      amdgpuBusId = "PCI:197:0:0";
+      nvidiaBusId = "PCI:196:0:0";
+      reverseSync.enable = true;
     };
   };
 
@@ -68,13 +92,10 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.cosmic-greeter.enableGnomeKeyring = true;
 
-  # Set global systemd service timeout
   systemd.settings.Manager.DefaultTimeoutStopSec = "15s";
 
   services.xserver = {
     enable = true;
-    # displayManager.gdm.enable = true;
-    # desktopManager.gnome.enable = true;
     xkb = {
       layout = "us";
       variant = "";
@@ -83,7 +104,6 @@
 
   services.printing.enable = true;
 
-  # enable sound with pipewire
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -96,14 +116,12 @@
     jack.enable = true;
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     helix
     fish
     google-chrome
     firefox
-    nil # nix language server
+    nil
 
     wl-clipboard
     xclip
@@ -111,11 +129,15 @@
 
     libusb1
     usbutils
+    pciutils
     linuxHeaders
 
     nvtopPackages.nvidia
     glxinfo
     vulkan-tools
+
+    brightnessctl
+    acpi
   ];
   environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
@@ -144,9 +166,9 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

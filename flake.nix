@@ -38,21 +38,6 @@
         ];
       };
 
-    # Special function for the ISO build
-    mkIso = hostname: system:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs hostname;
-        };
-        modules = [
-          {
-            nixpkgs = nixpkgsConfig;
-          }
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./hosts/${hostname}/iso.nix
-        ];
-      };
   in
     {
       nixosConfigurations = {
@@ -60,8 +45,6 @@
         oreb = mkNixos "oreb" "x86_64-linux";
         gyoll = mkNixos "gyoll" "x86_64-linux";
         auk = mkNixos "auk" "x86_64-linux";
-
-        whorl-iso = mkIso "whorl" "aarch64-linux";
       };
     }
     // flake-utils.lib.eachDefaultSystem (
