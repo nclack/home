@@ -16,6 +16,7 @@
     ./modules/fish.nix
     ./modules/git
     ./modules/packages.nix
+    ./modules/yazi.nix
   ];
 
   home = {
