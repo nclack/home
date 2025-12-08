@@ -39,15 +39,7 @@
       ".config/helix".source = ./config/helix;
       ".config/nb".source = ./config/nb;
       ".config/starship.toml".source = ./config/starship.toml;
-
-      ".config/ghostty/config".text = ''
-        theme = light:solarized-light,dark:Srcery
-        font-size = 11
-        background-opacity = 0.95
-        window-decoration = false
-        window-theme = dark
-        working-directory = inherit
-      '';
+      ".config/ghostty/config".source = ./config/ghostty/config;
 
       ".config/git/allowed_signers".text = ''
         nclack@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGUrV6mxvcVbyUk1S1k4ESKsyokMX2LIalgcpliE9Klf

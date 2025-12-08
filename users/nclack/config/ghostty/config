@@ -1,0 +1,9 @@
+theme = light:solarized-light,dark:Srcery
+font-size = 11
+background-opacity = 0.95
+window-decoration = false
+window-theme = dark
+working-directory = inherit
+
+# Claude Code shift-enter support
+keybind = shift+enter=text:\x1b\r
