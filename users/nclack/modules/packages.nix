@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }: {
   home.packages = with pkgs; [
@@ -11,6 +9,7 @@
     eza
     fd
     fish
+    ffmpeg
     fzf
     gh
     ghostty
@@ -22,7 +21,9 @@
     nb
     pandoc
     pinentry-qt
+    poppler
     readability-cli
+    resvg
     ripgrep
     tig
     tree
@@ -30,6 +31,7 @@
     vim # provides xxd
     w3m
     xclip
+    yazi
     zoxide
 
     # Fonts
