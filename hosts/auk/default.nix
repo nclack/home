@@ -86,7 +86,10 @@
     prime = {
       amdgpuBusId = "PCI:197:0:0";
       nvidiaBusId = "PCI:196:0:0";
-      reverseSync.enable = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
     };
   };
 
