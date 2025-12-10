@@ -9,7 +9,7 @@
     eza
     fd
     fish
-    ffmpeg
+    ffmpeg-full
     fzf
     gh
     ghostty
@@ -40,6 +40,8 @@
     font-awesome
 
     logseq
-    obs-studio
+    (obs-studio.override {
+      cudaSupport = true;
+    })
   ];
 }

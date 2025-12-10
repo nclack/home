@@ -18,6 +18,7 @@
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "acpi_enforce_resources=lax"
+    "nvme_core.default_ps_max_latency_us=0"
   ];
 
   # Workaround for mt7925e suspend issues: unload WiFi before suspend
@@ -56,6 +57,11 @@
     powerOnBoot = true;
   };
 
+  # Disable NVMe runtime power management to prevent D-state hangs
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{power/control}="on"
+  '';
+
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
     HandleLidSwitchExternalPower = "suspend";
@@ -72,8 +78,8 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    open = true;
+    powerManagement.finegrained = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
