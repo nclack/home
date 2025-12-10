@@ -79,7 +79,8 @@
     modesetting.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
-    open = false;
+    # RTX 5070 (Blackwell) requires open kernel modules
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
