@@ -19,7 +19,14 @@
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "acpi_enforce_resources=lax"
     "nvme_core.default_ps_max_latency_us=0"
+    # Disable multi-monitor memory clock switching to prevent DMUB timeout hangs
+    "amdgpu.dcfeaturemask=0"
   ];
+
+  # Disable ASPM for mt7925e WiFi to prevent post-resume hangs
+  boot.extraModprobeConfig = ''
+    options mt7925e disable_aspm=1
+  '';
 
   # Workaround for mt7925e suspend issues: unload WiFi before suspend
   systemd.services.wifi-suspend-workaround = {
@@ -57,9 +64,11 @@
     powerOnBoot = true;
   };
 
-  # Disable NVMe runtime power management to prevent D-state hangs
+  # Disable NVMe, WiFi, and NVIDIA GPU runtime power management to prevent D-state hangs
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:c3:00.0", ATTR{power/control}="on"
+    ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:c4:00.0", ATTR{power/control}="on"
   '';
 
   services.logind.settings.Login = {
