@@ -64,11 +64,10 @@
     powerOnBoot = true;
   };
 
-  # Disable NVMe, WiFi, and NVIDIA GPU runtime power management to prevent D-state hangs
+  # Disable NVMe and WiFi runtime power management to prevent D-state hangs
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="nvme", KERNEL=="nvme*", ATTR{power/control}="on"
     ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:c3:00.0", ATTR{power/control}="on"
-    ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:c4:00.0", ATTR{power/control}="on"
   '';
 
   services.logind.settings.Login = {
