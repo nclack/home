@@ -4,6 +4,7 @@ background-opacity = 0.95
 window-decoration = false
 window-theme = dark
 working-directory = inherit
+copy-on-select = clipboard
 
 # Claude Code shift-enter support
 keybind = shift+enter=text:\x1b\r

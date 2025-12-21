@@ -5,7 +5,8 @@
   hostname,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules
@@ -20,7 +21,8 @@
     "acpi_enforce_resources=lax"
     "nvme_core.default_ps_max_latency_us=0"
     # Disable multi-monitor memory clock switching to prevent DMUB timeout hangs
-    "amdgpu.dcfeaturemask=0"
+    # "amdgpu.dcfeaturemask=0"
+    "amdgpu.dcdebugmask=0x10"
   ];
 
   # Disable ASPM for mt7925e WiFi to prevent post-resume hangs
@@ -55,7 +57,7 @@
     firewall = {
       enable = true;
       # allowedUDPPorts = [];
-      allowedTCPPorts = [22];
+      allowedTCPPorts = [ 22 ];
     };
   };
 
@@ -63,6 +65,8 @@
     enable = true;
     powerOnBoot = true;
   };
+
+  hardware.opentabletdriver.enable = true;
 
   # Disable NVMe and WiFi runtime power management to prevent D-state hangs
   services.udev.extraRules = ''
@@ -82,7 +86,10 @@
     enable = true;
   };
 
-  services.xserver.videoDrivers = ["amdgpu" "nvidia"];
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "nvidia"
+  ];
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;

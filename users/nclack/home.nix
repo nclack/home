@@ -46,5 +46,11 @@
         nclack@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGUrV6mxvcVbyUk1S1k4ESKsyokMX2LIalgcpliE9Klf
       '';
     };
+
+    programs.direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      nix-direnv.enable=true;
+    };
   };
 }
