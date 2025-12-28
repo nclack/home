@@ -7,8 +7,4 @@ pkgs.mkShell {
     nil
     nixd
   ];
-
-  shellHook = ''
-    exec fish
-  '';
 }

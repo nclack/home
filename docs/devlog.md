@@ -1,3 +1,16 @@
+# 2025-12-23
+
+Figured out the deadlock issues an auk were because it was occasionally
+trying (and failing) to connect to a wifi6 ap on my router. It would fail to
+authenticate (maybe something with wpa3) and the retry a little while later.
+Eventually one of the retries would cause the deadlock.
+
+Eventually solved by restricting the wifi to band `a` which will only do
+wifi5. I did this through Cosmic's network settings but `nmcli` should work
+too. It's a setting specific to the network (`musculus`).
+
+I never could figure out how to configure nmcli via nix.
+
 # 2025-12-21
 
 Debugging multimonitor issues on auk. Something is powering off

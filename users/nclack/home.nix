@@ -4,6 +4,10 @@
 }: {
   programs.man.enable = false;
   programs.home-manager.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable=true;
+  };
 
   services.gpg-agent = {
     enable = true;
@@ -47,10 +51,5 @@
       '';
     };
 
-    programs.direnv = {
-      enable = true;
-      enableFishIntegration = true;
-      nix-direnv.enable=true;
-    };
   };
 }

@@ -17,6 +17,8 @@ command = "ruff-lsp"
 [[language]]
 name = "rust"
 language-servers = ["rust-analyzer", "typos"]
+formatter = { command = "rustfmt" }
+auto-format = true
 
 [[language]]
 name = "zig"

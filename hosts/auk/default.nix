@@ -18,42 +18,13 @@
   boot.kernelParams = [
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-    "acpi_enforce_resources=lax"
     "nvme_core.default_ps_max_latency_us=0"
-    # Disable multi-monitor memory clock switching to prevent DMUB timeout hangs
-    # "amdgpu.dcfeaturemask=0"
-    "amdgpu.dcdebugmask=0x10"
   ];
 
-  # Disable ASPM for mt7925e WiFi to prevent post-resume hangs
-  boot.extraModprobeConfig = ''
-    options mt7925e disable_aspm=1
-  '';
-
-  # Workaround for mt7925e suspend issues: unload WiFi before suspend
-  systemd.services.wifi-suspend-workaround = {
-    description = "Unload mt7925e WiFi driver before suspend";
-    wantedBy = [ "sleep.target" ];
-    before = [ "sleep.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.kmod}/bin/modprobe -r mt7925e";
-    };
-  };
-
-  systemd.services.wifi-resume-workaround = {
-    description = "Reload mt7925e WiFi driver after resume";
-    wantedBy = [ "suspend.target" ];
-    after = [ "suspend.target" ];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.kmod}/bin/modprobe mt7925e";
-    };
-  };
+  networking.networkmanager.enable = true;
 
   networking = {
     hostName = "${hostname}";
-    networkmanager.enable = true;
     firewall = {
       enable = true;
       # allowedUDPPorts = [];
