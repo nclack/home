@@ -98,6 +98,8 @@
     };
   };
 
+  services.hardware.bolt.enable = true;
+
   services.printing.enable = true;
 
   services.pulseaudio.enable = false;
@@ -129,7 +131,7 @@
     linuxHeaders
 
     nvtopPackages.nvidia
-    glxinfo
+    mesa-demos
     vulkan-tools
 
     brightnessctl

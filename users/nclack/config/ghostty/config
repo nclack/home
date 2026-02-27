@@ -1,8 +1,7 @@
-theme = light:solarized-light,dark:Srcery
+theme = light:Belafonte Day,dark:Srcery
 font-size = 11
 background-opacity = 0.95
 window-decoration = false
-window-theme = dark
 working-directory = inherit
 copy-on-select = clipboard
 

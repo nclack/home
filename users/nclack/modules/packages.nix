@@ -1,10 +1,12 @@
 {
   pkgs,
+  inputs,
   ...
 }: {
   home.packages = with pkgs; [
     bat
-    claude-code
+    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
+    gemini-cli
     delta
     eza
     fd
@@ -19,12 +21,14 @@
     markdown-oxide
     marksman
     nb
+    nixd
     pandoc
     pinentry-qt
     poppler
     readability-cli
     resvg
     ripgrep
+    taplo # lsp for toml
     tig
     tree
     typos-lsp

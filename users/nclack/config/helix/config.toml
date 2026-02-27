@@ -3,7 +3,7 @@ theme = "kanagawa-dragon"
 [editor]
 true-color = true
 line-number = "relative"
-rulers = [78,80]
+rulers = [78, 80]
 
 [editor.indent-guides]
 render = true
