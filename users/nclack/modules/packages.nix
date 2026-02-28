@@ -39,7 +39,6 @@
     zoxide
 
     # Fonts
-    jetbrains-mono
     nerd-fonts.jetbrains-mono
     font-awesome
 
