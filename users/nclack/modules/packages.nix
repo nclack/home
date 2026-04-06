@@ -1,11 +1,10 @@
 {
   pkgs,
-  inputs,
   ...
 }: {
   home.packages = with pkgs; [
     bat
-    inputs.claude-code.packages.${pkgs.stdenv.hostPlatform.system}.default
+    claude-code
     gemini-cli
     delta
     eza
@@ -13,6 +12,7 @@
     fish
     ffmpeg-full
     fzf
+    gersemi # cmake formatter
     gh
     ghostty
     git
@@ -21,6 +21,7 @@
     markdown-oxide
     marksman
     nb
+    neocmakelsp # cmake lsp
     nixd
     pandoc
     pinentry-qt

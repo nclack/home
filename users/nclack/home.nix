@@ -28,6 +28,10 @@
     username = "nclack";
     homeDirectory = "/home/nclack";
 
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
+
     sessionVariables = {
       EDITOR = "hx";
       # Force dark mode for GTK applications

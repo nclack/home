@@ -31,11 +31,27 @@ command = "zls"
 name = "c"
 auto-format = true
 formatter = { command = "clang-format" }
+language-servers = ["clangd"]
 
 [[language]]
 name = "cpp"
 auto-format = true
 formatter = { command = "clang-format" }
+language-servers = ["clangd"]
+
+[language-server.clangd]
+command = "clangd"
+args = ["--query-driver=/nix/store/*/bin/*"]
+
+[[language]]
+name = "cmake"
+language-servers = ["neocmakelsp", "typos"]
+formatter = { command = "gersemi", args = ["-"] }
+auto-format = true
+
+[language-server.neocmakelsp]
+command = "neocmakelsp"
+args = ["stdio"]
 
 [language-server.typos]
 command = "typos-lsp"
