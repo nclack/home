@@ -101,9 +101,11 @@
 
   services.flatpak.enable = true;
 
-  # Disable GNOME Keyring - autologin means it can't auto-unlock,
-  # so it just nags for a password on Chrome launch.
-  services.gnome.gnome-keyring.enable = false;
+  # Enable GNOME Keyring for secret storage (Claude Code auth, Chrome, etc.)
+  # PAM integration auto-unlocks the keyring on login/greeter so it won't nag.
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.cosmic-greeter.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
