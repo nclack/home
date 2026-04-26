@@ -12,6 +12,12 @@
     ../../modules
   ];
 
+  nixpkgs.overlays = [
+    (_final: prev: {
+      btop = prev.btop.override { cudaSupport = true; };
+    })
+  ];
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -83,10 +89,13 @@
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit.enable = true;
 
-  services.github-runners.chucky = {
+  # Org-scoped runner: serves any repo in acquire-project that a workflow
+  # requests with `runs-on: [self-hosted, gpu]`. Configure which repos can
+  # use it via GitHub → org settings → Actions → Runner groups.
+  services.github-runners.acquire-project = {
     enable = true;
-    url = "https://github.com/acquire-project/chucky";
-    tokenFile = "/etc/github-runners/chucky.token";
+    url = "https://github.com/acquire-project";
+    tokenFile = "/etc/github-runners/acquire-project.token";
     extraLabels = [ "gpu" ];
     extraPackages = with pkgs; [ docker docker-compose ];
     extraEnvironment = {
@@ -101,9 +110,8 @@
 
   services.flatpak.enable = true;
 
-  # Disable GNOME Keyring - autologin means it can't auto-unlock,
-  # so it just nags for a password on Chrome launch.
   services.gnome.gnome-keyring.enable = false;
+  security.pam.services.cosmic-greeter.enableGnomeKeyring = false;
 
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
@@ -157,6 +165,9 @@
 
     brightnessctl
     acpi
+
+    loupe
+    viu
   ];
   environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 

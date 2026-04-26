@@ -10,6 +10,7 @@
     enable = true;
     ignores = import ./ignores.nix;
     signing = {
+      format = null;
       key = "~/.ssh/id_ed25519.pub";
       signByDefault = true;
     };

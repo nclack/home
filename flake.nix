@@ -10,12 +10,15 @@
     };
     claude-code = {
       url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
   outputs = {
     nixpkgs,
     flake-utils,
+    claude-code,
     ...
   } @ inputs: let
     # Common nixpkgs configuration
@@ -23,6 +26,7 @@
       config = {
         allowUnfree = true;
       };
+      overlays = [claude-code.overlays.default];
     };
 
     mkNixos = hostname: system:
