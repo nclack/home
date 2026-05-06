@@ -24,6 +24,7 @@
   boot.kernelParams = [
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "nvidia.NVreg_RestrictProfilingToAdminUsers=0"
     "nvme_core.default_ps_max_latency_us=0"
   ];
 
@@ -97,6 +98,20 @@
     url = "https://github.com/acquire-project";
     tokenFile = "/etc/github-runners/acquire-project.token";
     extraLabels = [ "gpu" ];
+    extraPackages = with pkgs; [ docker docker-compose ];
+    extraEnvironment = {
+      DOCKER_HOST = "unix:///var/run/docker.sock";
+    };
+    serviceOverrides = {
+      SupplementaryGroups = [ "docker" ];
+    };
+  };
+
+  services.github-runners.damacy = {
+    enable = true;
+    url = "https://github.com/nclack/damacy";
+    tokenFile = "/etc/github-runners/damacy.token";
+    extraLabels = [ "gpu" "linux" ];
     extraPackages = with pkgs; [ docker docker-compose ];
     extraEnvironment = {
       DOCKER_HOST = "unix:///var/run/docker.sock";
