@@ -13,12 +13,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
+    codex-cli = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = {
     nixpkgs,
     flake-utils,
     claude-code,
+    codex-cli,
     ...
   } @ inputs: let
     # Common nixpkgs configuration
@@ -44,7 +50,6 @@
           ./users/nclack
         ];
       };
-
   in
     {
       nixosConfigurations = {
@@ -59,7 +64,10 @@
         pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
       in {
         formatter = pkgs.alejandra;
-        devShell = import ./shell.nix {inherit pkgs;};
+        devShell = import ./shell.nix {
+          inherit pkgs;
+          codex = codex-cli.packages.${system}.default;
+        };
       }
     );
 }

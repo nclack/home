@@ -3,7 +3,6 @@
 {
   pkgs,
   hostname,
-  inputs,
   ...
 }: {
   imports = [
@@ -33,17 +32,22 @@
     powerOnBoot = true;
   };
 
+  hardware.opentabletdriver.enable = true;
+
   hardware.graphics = {
     enable = true;
   };
+
+  virtualisation.docker.enable = true;
+  services.tailscale.enable = true;
 
   services.flatpak.enable = true;
 
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
 
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.cosmic-greeter.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = false;
+  security.pam.services.cosmic-greeter.enableGnomeKeyring = false;
 
   # Set global systemd service timeout
   systemd.settings.Manager.DefaultTimeoutStopSec = "15s";
@@ -57,6 +61,8 @@
       variant = "";
     };
   };
+
+  services.hardware.bolt.enable = true;
 
   services.printing.enable = true;
 
@@ -88,7 +94,17 @@
 
     libusb1
     usbutils
+    pciutils
     linuxHeaders
+
+    mesa-demos
+    vulkan-tools
+
+    brightnessctl
+    acpi
+
+    loupe
+    viu
   ];
   environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
