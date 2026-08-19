@@ -39,18 +39,8 @@
   };
 
   # Enable automatic login for the user.
-  services = {
-    getty.autologinUser = "nclack";
-
-    displayManager.autoLogin = {
-      enable = true;
-      user = "nclack";
-    };
-  };
-
-  # this was some workaround for some gnome issue, iirc
-  systemd.services = {
-    "getty@tty1".enable = false;
-    "autovt@tty1".enable = false;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "nclack";
   };
 }

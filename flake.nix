@@ -11,6 +11,10 @@
     claude-code = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    codex-cli = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
   };
@@ -19,6 +23,7 @@
     nixpkgs,
     flake-utils,
     claude-code,
+    codex-cli,
     ...
   } @ inputs: let
     # Common nixpkgs configuration
@@ -44,7 +49,6 @@
           ./users/nclack
         ];
       };
-
   in
     {
       nixosConfigurations = {
@@ -59,7 +63,12 @@
         pkgs = import nixpkgs (nixpkgsConfig // {inherit system;});
       in {
         formatter = pkgs.alejandra;
-        devShell = import ./shell.nix {inherit pkgs;};
+        devShells = {
+          default = import ./shell.nix {
+            inherit pkgs;
+            codex = codex-cli.packages.${system}.default;
+          };
+        };
       }
     );
 }

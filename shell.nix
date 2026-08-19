@@ -1,10 +1,14 @@
-{pkgs ? import <nixpkgs> {}}:
+{
+  pkgs ? import <nixpkgs> {},
+  codex ? pkgs.codex,
+}:
 pkgs.mkShell {
   name = "dev-home";
 
-  packages = with pkgs; [
-    alejandra
-    nil
-    nixd
+  packages = [
+    pkgs.alejandra
+    codex
+    pkgs.nil
+    pkgs.nixd
   ];
 }
