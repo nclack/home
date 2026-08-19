@@ -63,9 +63,7 @@
   services.displayManager.cosmic-greeter.enable = true;
 
   # Set global systemd service timeout
-  systemd.extraConfig = ''
-    DefaultTimeoutStopSec=15s
-  '';
+  systemd.settings.Manager.DefaultTimeoutStopSec = "15s";
 
   services.xserver = {
     enable = true;
@@ -81,7 +79,7 @@
   services.printing.enable = true;
 
   # enable sound with pipewire
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

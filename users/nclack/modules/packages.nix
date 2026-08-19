@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     bat
     claude-code
-    gemini-cli
     delta
     eza
     fd
@@ -39,7 +38,5 @@
     # Fonts
     nerd-fonts.jetbrains-mono
     font-awesome
-
-    logseq
   ];
 }
