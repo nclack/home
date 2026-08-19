@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     bat
     claude-code
@@ -44,8 +41,5 @@
     font-awesome
 
     logseq
-    (obs-studio.override {
-      cudaSupport = true;
-    })
   ];
 }
