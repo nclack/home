@@ -192,6 +192,27 @@
       enable = true;
       binfmt = true;
     };
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        zlib
+        openssl
+        libffi
+        bzip2
+        xz
+        zstd
+        libxcrypt
+        ncurses
+        readline
+        sqlite
+        tk
+        glib
+        nss
+        nspr
+        expat
+      ];
+    };
   };
 
   security.pam.loginLimits = [

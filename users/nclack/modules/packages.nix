@@ -43,7 +43,6 @@
     nerd-fonts.jetbrains-mono
     font-awesome
 
-    logseq
     (obs-studio.override {
       cudaSupport = true;
     })

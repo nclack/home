@@ -19,6 +19,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/git
+    ./modules/helix.nix
     ./modules/packages.nix
     ./modules/yazi.nix
   ];
@@ -45,7 +46,6 @@
     };
 
     file = {
-      ".config/helix".source = ./config/helix;
       ".config/nb".source = ./config/nb;
       ".config/starship.toml".source = ./config/starship.toml;
       ".config/ghostty/config".source = ./config/ghostty/config;

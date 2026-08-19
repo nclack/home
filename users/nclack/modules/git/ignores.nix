@@ -5,4 +5,6 @@
   ".egg"
   ".direnv"
   "*.pid"
+  ".claude"
+  ".codex"
 ]
