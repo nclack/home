@@ -29,8 +29,12 @@ in {
     dsearch
     cava
     khal
+    papers
     satty
+    showtime
     snapshot
+    tauon
+    zotero
   ];
 
   xdg.configFile = {
