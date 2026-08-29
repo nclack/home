@@ -2,8 +2,8 @@
   kanagawa-flavor = pkgs.fetchFromGitHub {
     owner = "dangooddd";
     repo = "kanagawa.yazi";
-    rev = "a0b1d9dec31387b5f8a82c96044e6419b6c46534";
-    hash = "sha256-nGFiAgVWfq7RkuGGCt07zm3z7ZTGiIPIR319ojPfdUk=";
+    rev = "04985d12842b06bdb3ad5f1b3d7abc631059b7f5";
+    hash = "sha256-Yz0zRVzmgbrk0m7OkItxIK6W0WkPze/t09pWFgziNrw=";
   };
 in {
   programs.yazi = {

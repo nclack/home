@@ -127,11 +127,6 @@
   services.flatpak.enable = true;
 
   services.gnome.gnome-keyring.enable = false;
-  security.pam.services.cosmic-greeter.enableGnomeKeyring = false;
-
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
-
 
   systemd.settings.Manager.DefaultTimeoutStopSec = "15s";
 
@@ -185,7 +180,6 @@
     loupe
     viu
   ];
-  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
 
   programs = {
     fish.enable = true;

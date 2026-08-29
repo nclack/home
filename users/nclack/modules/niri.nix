@@ -30,6 +30,7 @@ in {
     cava
     khal
     satty
+    snapshot
   ];
 
   xdg.configFile = {
@@ -58,8 +59,7 @@ in {
     fi
   '';
 
-  # Bind DMS to Niri's compositor unit rather than graphical-session.target;
-  # otherwise it would also start inside COSMIC and contend for notifications.
+  # Bind DMS to Niri's compositor unit rather than graphical-session.target.
   systemd.user.services.dms = {
     Unit = {
       Description = "Dank Material Shell for Niri";
