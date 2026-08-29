@@ -3,6 +3,7 @@
   lib,
   inputs,
   config,
+  hostname,
   ...
 }: {
   imports = [
@@ -11,7 +12,7 @@
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager = {
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {inherit hostname inputs;};
         useGlobalPkgs = true;
         useUserPackages = true;
         backupFileExtension = "backup";
@@ -38,9 +39,9 @@
     ];
   };
 
-  # Enable automatic login for the user.
+  # Always show the display manager so a session can be selected at login.
   services.displayManager.autoLogin = {
-    enable = true;
+    enable = false;
     user = "nclack";
   };
 }

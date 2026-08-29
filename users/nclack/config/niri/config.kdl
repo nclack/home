@@ -1,0 +1,116 @@
+// Niri stays intentionally small here. DMS provides the desktop shell and
+// writes optional fragments under ./dms for appearance, displays, and layout.
+
+input {
+    keyboard {
+        xkb { }
+        repeat-delay 200
+        repeat-rate 45
+        numlock
+    }
+
+    touchpad {
+        tap
+        dwt
+    }
+}
+
+gestures {
+    hot-corners { }
+}
+
+workspace "portrait" {
+    open-on-output "Dell Inc. DELL P2721Q 4C2ZG93"
+
+    layout {
+        default-column-width { proportion 1.0; }
+    }
+}
+
+layout {
+    gaps 8
+    center-focused-column "on-overflow"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width { proportion 0.5; }
+
+    focus-ring { off; }
+    border {
+        on
+        width 3
+        active-color "#E6C384"
+        inactive-color "#575653"
+        urgent-color "#E46876"
+    }
+    shadow {
+        on
+        softness 24
+        spread 3
+        offset x=0 y=4
+        color "#0006"
+    }
+}
+
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+}
+
+window-rule {
+    match app-id="com.mitchellh.ghostty"
+    default-column-width { proportion 0.5; }
+    draw-border-with-background false
+    background-effect {
+        blur true
+    }
+}
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^(org\.gnome\.|pavucontrol$|blueman-manager$|nm-connection-editor$)"#
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+animations {
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+    window-close {
+        duration-ms 150
+        curve "ease-out-quad"
+    }
+    horizontal-view-movement {
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+    }
+    workspace-switch {
+        spring damping-ratio=0.80 stiffness=523 epsilon=0.0001
+    }
+}
+
+// Later includes override the conservative fallbacks above. DMS creates these
+// files as their corresponding settings are changed.
+include optional=true "dms/colors.kdl"
+include optional=true "dms/layout.kdl"
+include optional=true "dms/alttab.kdl"
+include optional=true "dms/binds.kdl"
+include optional=true "dms/outputs.kdl"
+include optional=true "dms/cursor.kdl"
+include optional=true "dms/windowrules.kdl"
+include optional=true "dms/wpblur.kdl"

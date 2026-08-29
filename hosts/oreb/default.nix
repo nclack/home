@@ -2,7 +2,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   pkgs,
-  lib,
   hostname,
   ...
 }: {
@@ -47,7 +46,6 @@
 
   services.desktopManager.cosmic.enable = true;
   services.displayManager.cosmic-greeter.enable = true;
-  services.displayManager.autoLogin.enable = lib.mkForce false;
 
   services.gnome.gnome-keyring.enable = false;
   security.pam.services.cosmic-greeter.enableGnomeKeyring = false;

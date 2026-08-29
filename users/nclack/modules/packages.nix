@@ -1,7 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     bat
     claude-code
+    inputs.codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
     delta
     eza
     fd

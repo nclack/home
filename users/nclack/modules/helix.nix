@@ -11,9 +11,10 @@
 
   syncScript = pkgs.writeShellApplication {
     name = "helix-theme-sync";
-    runtimeInputs = with pkgs; [procps coreutils gnused];
+    runtimeInputs = with pkgs; [procps coreutils gnused jq];
     text = ''
       is_dark_file="$HOME/.config/cosmic/com.system76.CosmicTheme.Mode/v1/is_dark"
+      dms_session_file="$HOME/.local/state/DankMaterialShell/session.json"
       helix_dir="$HOME/.config/helix"
       config_file="$helix_dir/config.toml"
 
@@ -24,7 +25,26 @@
       fi
       mkdir -p "$helix_dir"
 
-      if [ -f "$is_dark_file" ] && [ "$(cat "$is_dark_file")" = "false" ]; then
+      # DMS owns appearance in niri; COSMIC owns it in the COSMIC session.
+      # XDG_CURRENT_DESKTOP is imported into the user manager by both sessions.
+      case "''${XDG_CURRENT_DESKTOP:-}" in
+        *niri*|*NIRI*)
+          if [ -f "$dms_session_file" ] && jq -e '.isLightMode == true' "$dms_session_file" >/dev/null 2>&1; then
+            is_light=true
+          else
+            is_light=false
+          fi
+          ;;
+        *)
+          if [ -f "$is_dark_file" ] && [ "$(cat "$is_dark_file")" = "false" ]; then
+            is_light=true
+          else
+            is_light=false
+          fi
+          ;;
+      esac
+
+      if [ "$is_light" = true ]; then
         theme="${lightTheme}"
       else
         theme="${darkTheme}"
@@ -50,7 +70,7 @@ in {
   '';
 
   systemd.user.services.helix-theme-sync = {
-    Unit.Description = "Sync Helix theme to COSMIC appearance";
+    Unit.Description = "Sync Helix theme to desktop appearance";
     Service = {
       Type = "oneshot";
       ExecStart = "${syncScript}/bin/helix-theme-sync";
@@ -59,9 +79,12 @@ in {
   };
 
   systemd.user.paths.helix-theme-sync = {
-    Unit.Description = "Watch COSMIC appearance to sync Helix theme";
+    Unit.Description = "Watch desktop appearance to sync Helix theme";
     Path = {
-      PathChanged = "%h/.config/cosmic/com.system76.CosmicTheme.Mode/v1/is_dark";
+      PathChanged = [
+        "%h/.config/cosmic/com.system76.CosmicTheme.Mode/v1/is_dark"
+        "%h/.local/state/DankMaterialShell/session.json"
+      ];
       Unit = "helix-theme-sync.service";
     };
     Install.WantedBy = ["default.target"];

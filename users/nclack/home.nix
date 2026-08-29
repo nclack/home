@@ -1,4 +1,6 @@
 {
+  hostname,
+  lib,
   pkgs,
   ...
 }: {
@@ -16,13 +18,15 @@
     maxCacheTtl = 7200;
   };
 
-  imports = [
-    ./modules/fish.nix
-    ./modules/git
-    ./modules/helix.nix
-    ./modules/packages.nix
-    ./modules/yazi.nix
-  ];
+  imports =
+    [
+      ./modules/fish.nix
+      ./modules/git
+      ./modules/helix.nix
+      ./modules/packages.nix
+      ./modules/yazi.nix
+    ]
+    ++ lib.optionals (hostname == "auk") [./modules/niri.nix];
 
   home = {
     stateVersion = "24.11"; # NOTE: changed this between whorl and oreb
@@ -35,8 +39,6 @@
 
     sessionVariables = {
       EDITOR = "hx";
-      # Force dark mode for GTK applications
-      GTK_THEME = "Adwaita:dark";
       # Fix Electron apps in Wayland
       NIXOS_OZONE_WL = "1";
       # nb configuration

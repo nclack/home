@@ -1,6 +1,7 @@
-theme = light:Belafonte Day,dark:Srcery
+theme = light:Flexoki Light,dark:Kanagawa Dragon
 font-size = 11
-background-opacity = 0.95
+background-opacity = 0.85
+background-opacity-cells = true
 window-decoration = false
 working-directory = inherit
 copy-on-select = clipboard
