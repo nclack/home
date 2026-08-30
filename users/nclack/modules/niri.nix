@@ -29,6 +29,7 @@ in {
     dsearch
     cava
     khal
+    fragments
     papers
     satty
     showtime
