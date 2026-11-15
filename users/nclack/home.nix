@@ -51,6 +51,11 @@
       ".config/nb".source = ./config/nb;
       ".config/starship.toml".source = ./config/starship.toml;
       ".config/ghostty/config".source = ./config/ghostty/config;
+      ".config/tmux/tmux.conf".text = ''
+        # Let the wheel/trackpad scroll tmux history, including over SSH.
+        set -g mouse on
+        set -g history-limit 100000
+      '';
 
       ".config/git/allowed_signers".text = ''
         nclack@gmail.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGUrV6mxvcVbyUk1S1k4ESKsyokMX2LIalgcpliE9Klf

@@ -31,6 +31,8 @@
 
   networking.networkmanager.enable = true;
 
+  services.upower.enable = true;
+
   networking = {
     hostName = "${hostname}";
     firewall = {

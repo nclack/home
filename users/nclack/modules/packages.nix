@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
     bat
     claude-code
+    chafa
     inputs.codex-cli.packages.${pkgs.stdenv.hostPlatform.system}.default
     delta
     eza
@@ -21,6 +22,7 @@
     jq
     markdown-oxide
     marksman
+    mosh
     nb
     neocmakelsp # cmake lsp
     nixd
@@ -32,6 +34,7 @@
     ripgrep
     taplo # lsp for toml
     tig
+    tmux
     tree
     typos-lsp
     vim # provides xxd
