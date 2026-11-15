@@ -153,10 +153,10 @@
       enable = true;
       support32Bit = true;
     };
-    jack.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
+    pipewire.jack
     helix
     fish
     google-chrome
