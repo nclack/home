@@ -11,6 +11,7 @@
     ./hardware-configuration.nix
     ./niri.nix
     ../../modules
+    ../../users/otis
   ];
 
   nixpkgs.overlays = [
