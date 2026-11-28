@@ -1,4 +1,6 @@
 {...}: {
+  home-manager.users.otis = import ./home.nix;
+
   users.users.otis = {
     isNormalUser = true;
     description = "Otis";

@@ -33,6 +33,12 @@
           background-color "#000000"
         }
 
+        input {
+          touchpad {
+            tap
+          }
+        }
+
         output "Dell Inc. DELL P2721Q 4C2ZG93" {
           scale 1.5
           transform "90"
